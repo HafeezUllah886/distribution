@@ -6,6 +6,7 @@ use App\Http\Controllers\confirmPasswordController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\DepositWithdrawController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\TransferController;
@@ -47,6 +48,10 @@ Route::middleware('auth')->group(function (){
 
     Route::get('/confirm-password', [confirmPasswordController::class, 'showConfirmPasswordForm'])->name('confirm-password');
     Route::post('/confirm-password', [confirmPasswordController::class, 'confirmPassword']);
+
+    Route::get('/products', [ProductsController::class, 'index'])->name('products');
+    Route::post('/product/store', [ProductsController::class, 'store'])->name('productStore');
+    Route::post('/product/update', [ProductsController::class, 'update'])->name('productUpdate');
 
 });
 
