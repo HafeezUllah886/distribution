@@ -1,6 +1,6 @@
 @extends('layout.app')
 @php
-    $page_title = "Products";
+    $page_title = "Order Bookers";
 @endphp
 @section('content')
  <!--  BEGIN BREADCRUMBS  -->
@@ -12,7 +12,7 @@
             </a>
             <div class="d-flex breadcrumb-content">
                 <div class="page-header">
-                    <div class="page-title"><h3>Products</h3></div>
+                    <div class="page-title"><h3>Order Bookers</h3></div>
                 </div>
             </div>
             <ul class="navbar-nav flex-row ms-auto breadcrumb-action-dropdown">
@@ -29,23 +29,19 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>TP</th>
-                    <th>MRP</th>
+                    <th>Name</th>
+                    <th>Contact</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $key => $product)
+                @foreach ($orderbookers as $key => $orderbooker)
                 <tr>
                     <td>{{ $key+1 }}</td>
-                    <td>{{ $product->code }}</td>
-                    <td>{{ $product->desc }}</td>
-                    <td>{{ $product->tp }}</td>
-                    <td>{{ $product->mrp }}</td>
+                    <td>{{ $orderbooker->name }}</td>
+                    <td>{{ $orderbooker->contact }}</td>
                     <td class="text-center d-flex justify-content-center align-items-center">
-                        <span onclick="edit({{$product->id}}, '{{$product->code}}', '{{$product->desc}}', {{$product->tp}}, {{$product->mrp}})" class="text-info"><i class="fa fa-edit">Edit</i></span>
+                        <span onclick="edit({{$orderbooker->id}}, '{{$orderbooker->name}}', '{{$orderbooker->contact}}')" class="text-info"><i class="fa fa-edit">Edit</i></span>
                     </td>
                 </tr>
                 @endforeach
@@ -58,27 +54,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create Product</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create Order Booker</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('productStore') }}" method="post">
+            <form action="{{ route('orderbookerStore') }}" method="post">
                 <div class="modal-body">
                     @csrf
-                    <div class="form-group">
-                        <label for="code"> Code <span class="text-danger">*</span></label>
-                        <input name="code" id="code" required class="form-control">
+                    <div class="form-group mt-2">
+                        <label for="name">Name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" required id="name" class="form-control">
                     </div>
                     <div class="form-group mt-2">
-                        <label for="desc">Description <span class="text-danger">*</span></label>
-                        <input type="text" name="desc" required id="desc" class="form-control">
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="tp">TP <span class="text-danger">*</span></label>
-                        <input type="number" name="tp" required id="tp" class="form-control">
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="mrp">MRP</label>
-                        <input type="number" name="mrp" id="mrp" class="form-control">
+                        <label for="contact">Contact</label>
+                        <input type="text" name="contact" id="contact" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -94,28 +82,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Order Booker</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('productUpdate') }}" method="post">
+            <form action="{{ route('orderbookerUpdate') }}" method="post">
                 <div class="modal-body">
                     @csrf
                     <input type="hidden" name="id" id="edit_id">
-                    <div class="form-group">
-                        <label for="code"> Code <span class="text-danger">*</span></label>
-                        <input name="code" id="edit_code" required class="form-control">
+                    <div class="form-group mt-2">
+                        <label for="name">Name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" required id="edit_name" class="form-control">
                     </div>
                     <div class="form-group mt-2">
-                        <label for="desc">Description <span class="text-danger">*</span></label>
-                        <input type="text" name="desc" required id="edit_desc" class="form-control">
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="tp">TP <span class="text-danger">*</span></label>
-                        <input type="number" name="tp" required id="edit_tp" class="form-control">
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="mrp">MRP</label>
-                        <input type="number" name="mrp" id="edit_mrp" class="form-control">
+                        <label for="contact">Contact</label>
+                        <input type="text" name="contact" id="edit_contact" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -150,13 +130,11 @@
   <script src="{{ asset('src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
 
   <script>
-    function edit(id, code, desc, tp, mrp)
+    function edit(id, name, contact)
     {
         $("#edit_id").val(id);
-        $("#edit_desc").val(desc);
-        $("#edit_code").val(code);
-        $("#edit_tp").val(tp);
-        $("#edit_mrp").val(mrp);
+        $("#edit_name").val(name);
+        $("#edit_contact").val(contact);
         $("#editModal").modal("show");
     }
   </script>

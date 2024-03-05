@@ -6,9 +6,11 @@ use App\Http\Controllers\confirmPasswordController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\DepositWithdrawController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\OrderbookerController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SalesmanController;
 use App\Http\Controllers\TransferController;
 use App\Models\transfer;
 use GuzzleHttp\Middleware;
@@ -52,6 +54,14 @@ Route::middleware('auth')->group(function (){
     Route::get('/products', [ProductsController::class, 'index'])->name('products');
     Route::post('/product/store', [ProductsController::class, 'store'])->name('productStore');
     Route::post('/product/update', [ProductsController::class, 'update'])->name('productUpdate');
+
+    Route::get('/salesman', [SalesmanController::class, 'index'])->name('salesman');
+    Route::post('/salesman/store', [SalesmanController::class, 'store'])->name('salesmanStore');
+    Route::post('/salesman/update', [SalesmanController::class, 'update'])->name('salesmanUpdate');
+
+    Route::get('/orderbooker', [OrderbookerController::class, 'index'])->name('orderbooker');
+    Route::post('/orderbooker/store', [OrderbookerController::class, 'store'])->name('orderbookerStore');
+    Route::post('/orderbooker/update', [OrderbookerController::class, 'update'])->name('orderbookerUpdate');
 
 });
 
