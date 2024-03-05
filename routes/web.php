@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchaseCreate');
     Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchaseStore');
 
-    Route::get('/accounts', [AccountController::class, 'index'])->name('accountsIndex');
+    Route::get('/accounts/{filter?}', [AccountController::class, 'index'])->name('accountsIndex');
     Route::post('/account/store', [AccountController::class, 'store'])->name('accountStore');
     Route::post('/account/update', [AccountController::class, 'update'])->name('accountUpdate');
     Route::get('/account/statement/{id}/{start}/{end}', [AccountController::class, 'statement'])->name('accountStatement');

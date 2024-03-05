@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('category');
-            $table->string('type')->nullable();
+            $table->string('b_name')->nullable();
             $table->string('cnic')->nullable();
             $table->string('contact')->nullable();
             $table->string('address')->nullable();
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

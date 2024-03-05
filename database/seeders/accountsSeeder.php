@@ -16,16 +16,59 @@ class accountsSeeder extends Seeder
         account::create(
             [
                 'name' => 'Cash',
-                'type' => 'Cash',
-                'notes' => 'Auto Generated',
+                'category' => 'Business',
             ]
         );
         account::create(
             [
-                'name' => 'ABC Bank',
-                'type' => 'Bank',
-                'notes' => 'Auto Generated',
-            ],
+                'name' => 'Cheque',
+                'category' => 'Business',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Bank',
+                'category' => 'Business',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Wholesale',
+                'category' => 'Discount',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Slab',
+                'category' => 'Discount',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Deal',
+                'category' => 'Discount',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Vendor',
+                'category' => 'Vendor',
+                'b_name' => 'Vendor Business Name',
+                'contact' => '0123-1111222',
+                'address' => 'Abc City'
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Customer',
+                'category' => 'Customer',
+                'b_name' => 'Customer Business Name',
+                'cnic' => '11111-1111111-1',
+                'contact' => '0123-1111222',
+                'address' => 'Abc City',
+                'ntn' => '12345',
+                'strn' => '12345',
+            ]
         );
     }
 }

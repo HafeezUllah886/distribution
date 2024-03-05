@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-    public function index()
+    public function index($filter = "All")
     {
-        $accounts = account::all();
-        return view('account.index', compact('accounts'));
+        if($filter == "All")
+        {   
+            $accounts = account::all();
+        }
+        else
+        {
+            $accounts = account::where('category', $filter)->get();
+        }
+        
+        return view('account.index', compact('accounts', 'filter'));
     }
 
     public function store(Request $req)
