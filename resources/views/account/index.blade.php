@@ -64,7 +64,9 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="action_{{ $key }}" >
                                 <a class="dropdown-item" href="{{ route('accountStatement', [$account->id, firstDayOfMonth(), lastDayOfMonth()]) }}">View Statement</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onclick="edit({{ $account->id }}, '{{ $account->name }}', '{{ $account->category }}', '{{ $account->b_name }}', '{{ $account->cnic }}', '{{ $account->contact }}', '{{ $account->address }}' , '{{ $account->ntn }}', '{{ $account->strn }}')">Edit</a>
+                                @if ($account->category != "Discount")
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="edit({{ $account->id }}, '{{ $account->name }}', '{{ $account->category }}', '{{ $account->b_name }}', '{{ $account->cnic }}', '{{ $account->contact }}', '{{ $account->address }}' , '{{ $account->ntn }}', '{{ $account->strn }}')">Edit</a>
+                                @endif
                             </div>
                         </div>
                     </td>

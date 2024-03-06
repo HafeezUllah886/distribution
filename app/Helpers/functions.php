@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\products;
 use App\Models\reference;
 use App\Models\transactions;
 use Carbon\Carbon;
@@ -70,3 +71,4 @@ function lastDayOfMonth()
 
     return $endOfMonth->format('Y-m-d');
 }
+

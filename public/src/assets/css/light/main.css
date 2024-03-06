@@ -490,7 +490,20 @@ span.red {
 .card.style-7 .card-text {
   color: #e0e6ed;
 }
-
+.selectize-input {
+  height: auto !important;
+  border: 1px solid #bfc9d4 !important;
+  color: #3b3f5c !important;
+  font-size: 15px !important;
+  padding: 8px 10px !important;
+  letter-spacing: 1px !important;
+  padding: 0.75rem 1.25rem !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  height: auto !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
 @media (max-width: 575px) {
   /* Card Style 3 */
   .card.style-3 {

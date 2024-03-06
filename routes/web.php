@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchaseHistory');
     Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchaseCreate');
     Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchaseStore');
+    Route::get('/singleProduct/{id}', [PurchaseController::class, 'singleProduct'])->name('singleProduct');
 
     Route::get('/accounts/{filter?}', [AccountController::class, 'index'])->name('accountsIndex');
     Route::post('/account/store', [AccountController::class, 'store'])->name('accountStore');
