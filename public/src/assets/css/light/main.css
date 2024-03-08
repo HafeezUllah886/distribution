@@ -490,6 +490,13 @@ span.red {
 .card.style-7 .card-text {
   color: #e0e6ed;
 }
+
+input:required:invalid {
+  border-color: red;
+}
+select:required:invalid {
+  border-color: red;
+}
 .selectize-input {
   height: auto !important;
   border: 1px solid #bfc9d4 !important;
@@ -552,15 +559,17 @@ input[type=search]::-ms-reveal {
 }
 
 .form-control:disabled:not(.flatpickr-input), .form-control[readonly]:not(.flatpickr-input) {
-  background-color: #f1f2f3;
+ 
   cursor: no-drop;
-  color: #d3d3d3;
+  background: #fff;
+  color: #3b3f5c;
 }
 .form-control:disabled:focus, .form-control[readonly]:focus {
   background-color: #f1f2f3;
 }
 .form-control:disabled::-webkit-input-placeholder, .form-control:disabled::-ms-input-placeholder, .form-control:disabled::-moz-placeholder, .form-control[readonly]::-webkit-input-placeholder, .form-control[readonly]::-ms-input-placeholder, .form-control[readonly]::-moz-placeholder {
-  color: #888ea8;
+  background: #fff;
+  color: #3b3f5c;
   font-size: 15px;
 }
 

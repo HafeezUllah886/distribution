@@ -456,6 +456,12 @@ body.dark .form-group label {
   display: inline-block;
   margin-bottom: 0.5rem;
 }
+input:required:invalid {
+  border-color: red;
+}
+select:required:invalid {
+  border-color: red;
+}
 
 body.dark .selectize-input {
   height: auto !important;
