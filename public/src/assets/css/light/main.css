@@ -530,6 +530,18 @@ input[type=search]::-webkit-search-results-decoration {
   display: none;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /* clears the 'X' from Internet Explorer */
 input[type=search]::-ms-clear {
   display: none;
@@ -662,6 +674,12 @@ input[type=search]::-ms-reveal {
 }
 .form-check .form-check-input {
   margin-left: -1.6em;
+}
+
+table.no-space tbody tr td
+{
+  padding: 2px !important;
+  margin: 2px !important;
 }
 
 .form-check-input:checked[type=checkbox]:not([role=switch]) {

@@ -2,6 +2,7 @@
 
 use App\Models\products;
 use App\Models\reference;
+use App\Models\stocks;
 use App\Models\transactions;
 use Carbon\Carbon;
 
@@ -28,6 +29,18 @@ function addTransaction($accountID, $date, $credit, $debt, $refID, $desc)
         'db' => $debt,
         'refID' => $refID,
         'notes' => $desc,
+    ]);
+}
+
+function createStock($productID, $date, $credit, $debt, $notes, $refID)
+{
+    stocks::create([
+        'productID' => $productID,
+        'date' => $date,
+        'cr' => $credit,
+        'db' => $debt,
+        'notes' => $notes,
+        'refID' => $refID,
     ]);
 }
 

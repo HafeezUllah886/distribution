@@ -531,6 +531,18 @@ body.dark label {
   margin-bottom: 0.5rem;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /*  Disable forms     */
 body.dark .custom-control-input:disabled ~ .custom-control-label {
   color: #d3d3d3;
@@ -681,6 +693,11 @@ body.dark .form-control-file::-webkit-file-upload-button {
   border-radius: 4px;
   border: transparent;
   outline: none;
+}
+table.no-space tbody tr td
+{
+    padding: 2px !important;
+    margin: 2px !important;
 }
 body.dark .form-control-file::-ms-file-upload-button {
   letter-spacing: 1px;

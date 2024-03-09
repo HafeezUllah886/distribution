@@ -14,26 +14,11 @@ return new class extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->string('desc');
-            $table->string('brand');
-            $table->string('model');
-            $table->string('color');
-            $table->string('hp');
-            $table->string('reg_no');
-            $table->string('chassis_no');
-            $table->string('eng_no');
-            $table->string('seller');
-            $table->string('seller_father')->nullable();
-            $table->string('seller_cnic');
-            $table->string('seller_contact');
-            $table->string('seller_address');
-            $table->string('broker');
-            $table->string('broker_cnic');
-            $table->string('broker_contact');
-            $table->string('broker_address');
-            $table->float('price', 14);
-            $table->text('partner')->nullable();
+            $table->foreignId('vendorID')->constrained('accounts', 'id');
+            $table->foreignId('accountID')->constrained('accounts', 'id');
+            $table->float('shippingCost');
             $table->text('notes')->nullable();
+            $table->integer('refID');
             $table->timestamps();
         });
     }

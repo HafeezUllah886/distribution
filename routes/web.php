@@ -11,7 +11,9 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalesmanController;
+use App\Http\Controllers\StocksController;
 use App\Http\Controllers\TransferController;
+use App\Models\purchase;
 use App\Models\transfer;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +35,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchaseHistory');
     Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchaseCreate');
     Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchaseStore');
+    Route::get('/purchase/view/{id}', [PurchaseController::class, 'show'])->name('purchaseView');
     Route::get('/singleProduct/{id}', [PurchaseController::class, 'singleProduct'])->name('singleProduct');
 
     Route::get('/accounts/{filter?}', [AccountController::class, 'index'])->name('accountsIndex');
@@ -64,10 +67,14 @@ Route::middleware('auth')->group(function (){
     Route::post('/orderbooker/store', [OrderbookerController::class, 'store'])->name('orderbookerStore');
     Route::post('/orderbooker/update', [OrderbookerController::class, 'update'])->name('orderbookerUpdate');
 
+    Route::get('/stocks', [StocksController::class, 'index'])->name('stockIndex');
+    Route::get('/stocks/details/{product}/{start}/{end}', [StocksController::class, 'details'])->name('stockDetails');
+
 });
 
 Route::middleware(['confirm.password'])->group(function () {
     Route::get('/transfer/delete/{ref}',[TransferController::class, 'delete'])->name('transferDelete');
     Route::get('/depositwithdraw/delete/{ref}',[DepositWithdrawController::class, 'delete'])->name('depositWithdrawDelete');
     Route::get('/expense/delete/{ref}',[ExpenseController::class, 'delete'])->name('expenseDelete');
+    Route::get('/purchase/delete/{ref}',[purchase::class, 'delete'])->name('purchaseDelete');
 });

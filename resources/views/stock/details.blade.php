@@ -1,6 +1,6 @@
 @extends('layout.app')
 @php
-    $page_title = "Account Statement";
+    $page_title = "Stock Details";
 @endphp
 @section('content')
  <!--  BEGIN BREADCRUMBS  -->
@@ -12,7 +12,7 @@
             </a>
             <div class="d-flex breadcrumb-content">
                 <div class="page-header">
-                    <div class="page-title"><h3>Statement - {{ $account->name }}</h3></div>
+                    <div class="page-title"><h3>Stock Details - {{ $product->desc }}</h3></div>
                 </div>
             </div>
 
@@ -29,10 +29,10 @@
                 Closing Balance: {{ $closing_balance }}
             </div>
             <div class="col-md-3">
-                <input type="date" id="start" onchange="update({{ $account->id }})" value="{{ $start }}" class="form-control">
+                <input type="date" id="start" onchange="update({{ $product->id }})" value="{{ $start }}" class="form-control">
             </div>
             <div class="col-md-3">
-                <input type="date" id="end" onchange="update({{ $account->id }})" value="{{ $end }}" class="form-control">
+                <input type="date" id="end" onchange="update({{ $product->id }})" value="{{ $end }}" class="form-control">
             </div>
         </div>
         <table id="html5-extension" class="table dt-table-hover" style="width:100%">
@@ -47,14 +47,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($trans as $key => $tran)
+                @foreach ($stocks as $key => $stock)
                 <tr>
-                    <td>{{ $tran->refID }}</td>
-                    <td>{{ $tran->date }}</td>
-                    <td>{{ $tran->notes }}</td>
-                    <td>{{ $tran->cr }}</td>
-                    <td>{{ $tran->db }}</td>
-                    <td>{{ $tran->balance }}</td>
+                    <td>{{ $stock->refID }}</td>
+                    <td>{{ $stock->date }}</td>
+                    <td>{{ $stock->notes }}</td>
+                    <td>{{ $stock->cr }}</td>
+                    <td>{{ $stock->db }}</td>
+                    <td>{{ $stock->balance }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -90,7 +90,7 @@
     {
         var start = $("#start").val();
         var end = $("#end").val();
-        window.open("{{ url('/account/statement/') }}/"+id+"/"+start+"/"+end, "_self");
+        window.open("{{ url('/stocks/details/') }}/"+id+"/"+start+"/"+end, "_self");
     }
   </script>
 @endsection

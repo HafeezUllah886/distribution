@@ -1,6 +1,6 @@
 @extends('layout.app')
 @php
-    $page_title = "Account Statement";
+    $page_title = "Stocks";
 @endphp
 @section('content')
  <!--  BEGIN BREADCRUMBS  -->
@@ -12,57 +12,42 @@
             </a>
             <div class="d-flex breadcrumb-content">
                 <div class="page-header">
-                    <div class="page-title"><h3>Statement - {{ $account->name }}</h3></div>
+                    <div class="page-title"><h3>Stocks</h3></div>
                 </div>
             </div>
-
         </header>
     </div>
 </div>
 <div class="card mt-2">
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-3">
-                Opening Balance: {{ $opening_balance }}
-            </div>
-            <div class="col-md-3">
-                Closing Balance: {{ $closing_balance }}
-            </div>
-            <div class="col-md-3">
-                <input type="date" id="start" onchange="update({{ $account->id }})" value="{{ $start }}" class="form-control">
-            </div>
-            <div class="col-md-3">
-                <input type="date" id="end" onchange="update({{ $account->id }})" value="{{ $end }}" class="form-control">
-            </div>
-        </div>
         <table id="html5-extension" class="table dt-table-hover" style="width:100%">
             <thead>
                 <tr>
-                    <th>Ref #</th>
-                    <th>Date</th>
-                    <th>Notes</th>
-                    <th>Credit</th>
-                    <th>Debit</th>
-                    <th>Balance</th>
+                    <th>#</th>
+                    <th>Code</th>
+                    <th>Desc</th>
+                    <th>Stock</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($trans as $key => $tran)
+                @foreach ($products as $key => $product)
                 <tr>
-                    <td>{{ $tran->refID }}</td>
-                    <td>{{ $tran->date }}</td>
-                    <td>{{ $tran->notes }}</td>
-                    <td>{{ $tran->cr }}</td>
-                    <td>{{ $tran->db }}</td>
-                    <td>{{ $tran->balance }}</td>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $product->code }}</td>
+                    <td>{{ $product->desc }}</td>
+                    <td>{{ $product->stock }}</td>
+                    <td class="text-center d-flex justify-content-center align-items-center">
+                        <a href="{{ route('stockDetails', [$product->id, firstDayOfMonth(), lastDayOfMonth()]) }}" class="text-info"><i class="fa fa-edit">Details</i></a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
-
         </table>
     </div>
 </div>
 
+<!--  END BREADCRUMBS  -->
 @endsection
 
 @section('more-css')
@@ -84,13 +69,4 @@
   <script src="{{ asset('src/plugins/src/table/datatable/button-ext/buttons.print.min.js') }}"></script>
   <script src="{{ asset('src/plugins/src/table/datatable/button-ext/buttons.html5.min.js') }}"></script>
   <script src="{{ asset('src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
-
-  <script>
-    function update(id)
-    {
-        var start = $("#start").val();
-        var end = $("#end").val();
-        window.open("{{ url('/account/statement/') }}/"+id+"/"+start+"/"+end, "_self");
-    }
-  </script>
 @endsection
