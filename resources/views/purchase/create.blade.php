@@ -55,8 +55,10 @@
                             <th width="20%">Product</th>
                             <th class="text-center">Quantity</th>
                             <th class="text-center">Price</th>
-                            <th class="text-center">Value</th>
-                            <th class="text-center">Discount</th>
+                            <th class="text-center">Dist</th>
+                            <th class="text-center">W/S</th>
+                            <th class="text-center">Sch</th>
+                            <th class="text-center">Gross</th>
                             <th class="text-center">GST</th>
                             <th class="text-center">FST</th>
                             <th class="text-center">Amount</th>
@@ -68,8 +70,10 @@
                         <tfoot>
                             <tr>
                                 <th colspan="3" class="text-end">Total</th>
-                                <th id="totalValue" class="text-center"></th>
-                                <th id="totalDiscount" class="text-center"></th>
+                                <th id="totalDist" class="text-center"></th>
+                                <th id="totalWS" class="text-center"></th>
+                                <th id="totalSch" class="text-center"></th>
+                                <th id="totalGross" class="text-center"></th>
                                 <th id="totalGst" class="text-center"></th>
                                 <th id="totalFst" class="text-center"></th>
                                 <th id="totalAmount" class="text-center"></th>
@@ -163,11 +167,19 @@
                             proHTML += '<td>'+product.desc+'</td>';
                             proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" value="1" required oninput="updateQty('+productID+')" name="qty[]" id="qty_'+productID+'"></td>';
                             proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="0" required oninput="updateQty('+productID+')" name="price[]" id="price_'+productID+'"></td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="0" readonly required name="value[]" id="value_'+productID+'"></td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="discount_per_'+productID+'" value="8" name="discount_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="discount_val_'+productID+'" required value="0" name="discount_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="dist_per_'+productID+'" value="8" name="dist_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="dist_val_'+productID+'" required value="0" name="dist_val[]">';
                             proHTML += '</td>';
+                            proHTML += '<td>';
+                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="ws_per_'+productID+'" value="2" name="ws_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="ws_val_'+productID+'" required value="0" name="ws_val[]">';
+                            proHTML += '</td>';
+                            proHTML += '<td>';
+                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="sch_per_'+productID+'" value="3" name="sch_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="sch_val_'+productID+'" required value="0" name="sch_val[]">';
+                            proHTML += '</td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="0" readonly required name="gross[]" id="gross_'+productID+'"></td>';
                             proHTML += '<td>';
                                 proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="gst_per_'+productID+'" value="18" name="gst_per[]">';
                                 proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="gst_val_'+productID+'" required value="0" name="gst_val[]">';
@@ -207,42 +219,64 @@
         var existingQty = $("#qty_"+id).val();
         var price = $("#price_"+id).val();
 
-        var value = existingQty * price;
+        var g_price = existingQty * price;
 
-        var discount = $("#discount_per_"+id).val();
-        var discount_val = (value / 100) * discount;
+        var dist = $("#dist_per_"+id).val();
+        var dist_val = (g_price / 100) * dist;
+
+        var ws = $("#ws_per_"+id).val();
+        var ws_val = (g_price / 100) * ws;
+
+        var sch = $("#sch_per_"+id).val();
+        var sch_val = (g_price / 100) * sch;
+
+        var gross = g_price - dist_val - ws_val - sch_val;
 
         var gst = $("#gst_per_"+id).val();
-        var gst_val = (value / 100) * gst;
+        var gst_val = (gross / 100) * gst;
 
         var fst = $("#fst_per_"+id).val();
-        var fst_val = (value / 100) * fst;
+        var fst_val = (gross / 100) * fst;
 
-        var amount = (value - discount_val) + gst_val + fst_val;
-
-        $("#value_"+id).val(value.toFixed(2));
-        $("#discount_val_"+id).val(discount_val.toFixed(2));
-        $("#gst_val_"+id).val(gst_val.toFixed(2));
-        $("#fst_val_"+id).val(fst_val.toFixed(2));
-        $("#amount_"+id).val(amount.toFixed(2));
+        var amount = gross + gst_val + fst_val;
+       
+        $("#dist_val_"+id).val(dist_val.toFixed(0));
+        $("#ws_val_"+id).val(ws_val.toFixed(0));
+        $("#sch_val_"+id).val(sch_val.toFixed(0));
+        $("#gross_"+id).val(gross.toFixed(0));
+        $("#gst_val_"+id).val(gst_val.toFixed(0));
+        $("#fst_val_"+id).val(fst_val.toFixed(0));
+        $("#amount_"+id).val(amount.toFixed(0));
         updateAmounts(); 
         }
 
         function updateAmounts(){
         var subTotal = 0;
-        var totalDiscount = 0;
+        var totalDist = 0;
+        var totalSch = 0;
+        var totalWs = 0;
         var totalGst = 0;
         var totalFst = 0;
-        var totalValue = 0;
+        var totalGross = 0;
         $("input[id^='amount_']").each(function() {
             var inputId = $(this).attr('id');
             var inputValue = $(this).val();
             subTotal += parseFloat(inputValue);
         });
-        $("input[id^='discount_val_']").each(function() {
+        $("input[id^='dist_val_']").each(function() {
             var inputId = $(this).attr('id');
             var inputValue = $(this).val();
-            totalDiscount += parseFloat(inputValue);
+            totalDist += parseFloat(inputValue);
+        });
+        $("input[id^='ws_val_']").each(function() {
+            var inputId = $(this).attr('id');
+            var inputValue = $(this).val();
+            totalWs += parseFloat(inputValue);
+        });
+        $("input[id^='sch_val_']").each(function() {
+            var inputId = $(this).attr('id');
+            var inputValue = $(this).val();
+            totalSch += parseFloat(inputValue);
         });
         $("input[id^='gst_val_']").each(function() {
             var inputId = $(this).attr('id');
@@ -255,17 +289,19 @@
             totalFst += parseFloat(inputValue);
         });
 
-        $("input[id^='value_']").each(function() {
+        $("input[id^='gross_']").each(function() {
             var inputId = $(this).attr('id');
             var inputValue = $(this).val();
-            totalValue += parseFloat(inputValue);
+            totalGross += parseFloat(inputValue);
         });
 
-            $("#totalAmount").text(subTotal.toFixed(2));
-            $("#totalDiscount").text(totalDiscount.toFixed(2));
-            $("#totalGst").text(totalGst.toFixed(2));
-            $("#totalFst").text(totalFst.toFixed(2));
-            $("#totalValue").text(totalValue.toFixed(2));
+            $("#totalAmount").text(subTotal.toFixed(0));
+            $("#totalDist").text(totalDist.toFixed(0));
+            $("#totalWS").text(totalWs.toFixed(0));
+            $("#totalSch").text(totalSch.toFixed(0));
+            $("#totalGst").text(totalGst.toFixed(0));
+            $("#totalFst").text(totalFst.toFixed(0));
+            $("#totalGross").text(totalGross.toFixed(0));
         }
 
         function deleteRow(id){

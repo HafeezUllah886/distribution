@@ -13,6 +13,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalesmanController;
 use App\Http\Controllers\StocksController;
 use App\Http\Controllers\TransferController;
+use App\Http\Controllers\UnitsController;
 use App\Models\purchase;
 use App\Models\transfer;
 use GuzzleHttp\Middleware;
@@ -69,6 +70,10 @@ Route::middleware('auth')->group(function (){
 
     Route::get('/stocks', [StocksController::class, 'index'])->name('stockIndex');
     Route::get('/stocks/details/{product}/{start}/{end}', [StocksController::class, 'details'])->name('stockDetails');
+
+    Route::get('/units', [UnitsController::class, 'index'])->name('unitIndex');
+    Route::post('/units/store', [UnitsController::class, 'store'])->name('unitStore');
+    Route::post('/units/update', [UnitsController::class, 'update'])->name('unitUpdate');
 
 });
 

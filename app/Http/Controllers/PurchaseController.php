@@ -53,13 +53,24 @@ class PurchaseController extends Controller
             $productID      = $req->productID[$key];
             $qty            = $req->qty[$key];
             $price          = $req->price[$key];
-            $value          = $req->value[$key];
-            $discount_per   = $req->discount_per[$key];
-            $discount_val   = $req->discount_val[$key];
+
+            $dist_per       = $req->dist_per[$key];
+            $dist_val       = $req->dist_val[$key];
+
+            $ws_per         = $req->ws_per[$key];
+            $ws_val         = $req->ws_val[$key];
+
+            $sch_per        = $req->sch_per[$key];
+            $sch_val        = $req->sch_val[$key];
+
+            $gross          = $req->gross[$key];
+
             $gst_per        = $req->gst_per[$key];
             $gst_val        = $req->gst_val[$key];
+
             $fst_per        = $req->fst_per[$key];
             $fst_val        = $req->fst_val[$key];
+
             $amount         = $req->amount[$key];
             $total         += $amount;
             purchase_details::create(
@@ -68,13 +79,24 @@ class PurchaseController extends Controller
                     'productID'     => $productID,
                     'qty'           => $qty,
                     'price'         => $price,
-                    'value'         => $value,
-                    'discount_per'  => $discount_per,
-                    'discount_val'  => $discount_val,
+
+                    'dist_per'      => $dist_per,
+                    'dist_val'      => $dist_val,
+
+                    'ws_per'        => $ws_per,
+                    'ws_val'        => $ws_val,
+
+                    'sch_per'       => $sch_per,
+                    'sch_val'       => $sch_val,
+
+                    'gross'         => $gross,
+
                     'gst_per'       => $gst_per,
                     'gst_val'       => $gst_val,
+
                     'fst_per'       => $fst_per,
                     'fst_val'       => $fst_val,
+
                     'amount'        => $amount,
                     'date'          => $req->date,
                     'refID'         => $refID,

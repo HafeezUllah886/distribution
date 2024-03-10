@@ -573,7 +573,7 @@ input[type=search]::-ms-reveal {
 .form-control:disabled:not(.flatpickr-input), .form-control[readonly]:not(.flatpickr-input) {
  
   cursor: no-drop;
-  background: #fff;
+  background: #e8e8e8;
   color: #3b3f5c;
 }
 .form-control:disabled:focus, .form-control[readonly]:focus {
