@@ -39,8 +39,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="inv--product-table-section p-0 table-responsive">
-                                           <table class="table">
+                                        <div class="inv--product-table-section p-0 table-responsive ml-1 mr-1">
+                                           <table class="table no-space no-space-h no-space-f">
                                             <thead>
                                                 <th>#</th>
                                                 <th>Description</th>
@@ -51,6 +51,7 @@
                                                 <th>Sch</th>
                                                 <th>Gross</th>
                                                 <th>GST</th>
+                                                <th>MRP</th>
                                                 <th>FST</th>
                                                 <th class="text-end">Sub-Total</th>
                                             </thead>
@@ -61,11 +62,12 @@
                                                     <td>{{$product->product->desc}}</td>
                                                     <td>{{$product->qty}}</td>
                                                     <td>{{number_format($product->price, 2)}}</td>
-                                                    <td>{{number_format($product->dist_val,2)}}({{$product->dist_per}}%)</td>
+                                                    <td>{{number_format($product->dist_val,0)}}({{$product->dist_per}}%)</td>
                                                     <td>{{number_format($product->ws_val,0)}}({{$product->ws_per}}%)</td>
                                                     <td>{{number_format($product->sch_val,0)}}({{$product->sch_per}}%)</td>
                                                     <td>{{number_format($product->gross, 0)}}</td>
                                                     <td>{{number_format($product->gst_val,0)}}({{$product->gst_per}}%)</td>
+                                                    <td>{{number_format($product->mrp_val,0)}}({{$product->mrp_per}})</td>
                                                     <td>{{number_format($product->fst_val,0)}}({{$product->fst_per}}%)</td>
                                                     <td class="text-end">{{number_format($product->amount,0)}}</td>
                                                 </tr>
@@ -73,12 +75,12 @@
                                             </tbody>
                                             <tfoot>
                                                 <th colspan="4" class="text-end">Total</th>
-                                                
                                                 <th>{{number_format($purchase->details->sum('dist_val'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('ws_val'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('sch_val'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('gross'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('gst_val'),0)}}</th>
+                                                <th>{{number_format($purchase->details->sum('mrp_val'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('fst_val'),0)}}</th>
                                                 <th class="text-end">{{number_format($purchase->details->sum('amount'),0)}}</th>
                                             </tfoot>

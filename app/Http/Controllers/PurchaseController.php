@@ -68,6 +68,9 @@ class PurchaseController extends Controller
             $gst_per        = $req->gst_per[$key];
             $gst_val        = $req->gst_val[$key];
 
+            $mrp_per        = $req->mrp_per[$key];
+            $mrp_val        = $req->mrp_val[$key];
+
             $fst_per        = $req->fst_per[$key];
             $fst_val        = $req->fst_val[$key];
 
@@ -93,6 +96,9 @@ class PurchaseController extends Controller
 
                     'gst_per'       => $gst_per,
                     'gst_val'       => $gst_val,
+
+                    'mrp_per'       => $mrp_per,
+                    'mrp_val'       => $mrp_val,
 
                     'fst_per'       => $fst_per,
                     'fst_val'       => $fst_val,

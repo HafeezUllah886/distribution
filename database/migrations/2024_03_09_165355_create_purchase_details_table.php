@@ -27,6 +27,8 @@ return new class extends Migration
             $table->float('gross', 14, 2);
             $table->float('gst_per', 14, 2);
             $table->float('gst_val', 14, 2);
+            $table->float('mrp_per', 14, 2);
+            $table->float('mrp_val', 14, 2);
             $table->float('fst_per', 14, 2);
             $table->float('fst_val', 14, 2);
             $table->date('date');

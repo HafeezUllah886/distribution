@@ -60,6 +60,7 @@
                             <th class="text-center">Sch</th>
                             <th class="text-center">Gross</th>
                             <th class="text-center">GST</th>
+                            <th class="text-center">MRP</th>
                             <th class="text-center">FST</th>
                             <th class="text-center">Amount</th>
                             <th></th>
@@ -75,6 +76,7 @@
                                 <th id="totalSch" class="text-center"></th>
                                 <th id="totalGross" class="text-center"></th>
                                 <th id="totalGst" class="text-center"></th>
+                                <th id="totalMrp" class="text-center"></th>
                                 <th id="totalFst" class="text-center"></th>
                                 <th id="totalAmount" class="text-center"></th>
                                 <th></th>
@@ -191,6 +193,10 @@
                                 proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="gst_val_'+productID+'" required value="0" name="gst_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';
+                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="mrp_per_'+productID+'" value="'+product.mrp+'" name="mrp_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="mrp_val_'+productID+'" required value="0" name="mrp_val[]">';
+                            proHTML += '</td>';
+                            proHTML += '<td>';
                                 proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="fst_per_'+productID+'" value="0" name="fst_per[]">';
                                 proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="fst_val_'+productID+'" required value="0" name="fst_val[]">';
                             proHTML += '</td>';
@@ -221,7 +227,7 @@
                 if (currentValue < 1) {
                     input.val(1);
                 }
-            });
+        });
         var existingQty = $("#qty_"+id).val();
         var price = $("#price_"+id).val();
 
@@ -241,10 +247,13 @@
         var gst = $("#gst_per_"+id).val();
         var gst_val = (gross / 100) * gst;
 
+        var mrp = $("#mrp_per_"+id).val();
+        var t_mrp = mrp * existingQty;
+
         var fst = $("#fst_per_"+id).val();
         var fst_val = (gross / 100) * fst;
 
-        var amount = gross + gst_val + fst_val;
+        var amount = gross + gst_val + fst_val + t_mrp;
        
         $("#dist_val_"+id).val(dist_val.toFixed(2));
         $("#ws_val_"+id).val(ws_val.toFixed(2));
@@ -252,6 +261,7 @@
         $("#gross_"+id).val(gross.toFixed(2));
         $("#gst_val_"+id).val(gst_val.toFixed(2));
         $("#fst_val_"+id).val(fst_val.toFixed(2));
+        $("#mrp_val_"+id).val(t_mrp.toFixed(2));
         $("#amount_"+id).val(amount.toFixed(2));
         updateAmounts(); 
         }
@@ -262,6 +272,7 @@
         var totalSch = 0;
         var totalWs = 0;
         var totalGst = 0;
+        var totalMrp = 0;
         var totalFst = 0;
         var totalGross = 0;
         $("input[id^='amount_']").each(function() {
@@ -289,6 +300,13 @@
             var inputValue = $(this).val();
             totalGst += parseFloat(inputValue);
         });
+
+        $("input[id^='mrp_val_']").each(function() {
+            var inputId = $(this).attr('id');
+            var inputValue = $(this).val();
+            totalMrp += parseFloat(inputValue);
+        });
+
         $("input[id^='fst_val_']").each(function() {
             var inputId = $(this).attr('id');
             var inputValue = $(this).val();
@@ -306,6 +324,7 @@
             $("#totalWS").text(totalWs.toFixed(2));
             $("#totalSch").text(totalSch.toFixed(2));
             $("#totalGst").text(totalGst.toFixed(2));
+            $("#totalMrp").text(totalMrp.toFixed(2));
             $("#totalFst").text(totalFst.toFixed(2));
             $("#totalGross").text(totalGross.toFixed(2));
         }
