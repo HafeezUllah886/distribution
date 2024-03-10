@@ -74,11 +74,11 @@
                     </div>
                     <div class="form-group mt-2">
                         <label for="tp">TP <span class="text-danger">*</span></label>
-                        <input type="number" name="tp" required id="tp" class="form-control">
+                        <input type="number" name="tp" step="any" required id="tp" class="form-control">
                     </div>
                     <div class="form-group mt-2">
                         <label for="mrp">MRP</label>
-                        <input type="number" name="mrp" id="mrp" class="form-control">
+                        <input type="number" name="mrp" step="any" id="mrp" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -111,11 +111,11 @@
                     </div>
                     <div class="form-group mt-2">
                         <label for="tp">TP <span class="text-danger">*</span></label>
-                        <input type="number" name="tp" required id="edit_tp" class="form-control">
+                        <input type="number" name="tp" step="any" required id="edit_tp" class="form-control">
                     </div>
                     <div class="form-group mt-2">
                         <label for="mrp">MRP</label>
-                        <input type="number" name="mrp" id="edit_mrp" class="form-control">
+                        <input type="number" name="mrp" step="any" id="edit_mrp" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
