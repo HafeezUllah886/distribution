@@ -11,18 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchase_details', function (Blueprint $table) {
+        Schema::create('sale_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('purchaseID')->constrained('purchases', 'id');
+            $table->foreignId('salesID')->constrained('sales', 'id');
             $table->foreignId('productID')->constrained('products', 'id');
             $table->float('qty', 10, 2);
             $table->float('price', 10, 2);
-            $table->float('dist_per', 14, 2);
-            $table->float('dist_val', 14, 2);
+            $table->float('rt_per', 14, 2);
+            $table->float('rt_val', 14, 2);
             $table->float('ws_per', 14, 2);
             $table->float('ws_val', 14, 2);
-            $table->float('sch_per', 14, 2);
-            $table->float('sch_val', 14, 2);
+            $table->float('slb_per', 14, 2);
+            $table->float('slb_val', 14, 2);
+            $table->integer('bonus');
+            $table->float('deal_per', 14, 2);
+            $table->float('deal_val', 14, 2);
             $table->float('gross', 14, 2);
             $table->float('gst_per', 14, 2);
             $table->float('gst_val', 14, 2);
@@ -43,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purchase_details');
+        Schema::dropIfExists('sale_details');
     }
 };

@@ -33,7 +33,7 @@
                     <th>Description</th>
                     <th>TP</th>
                     <th>MRP</th>
-                    <th>Unit</th>
+                    <th>Pack Size</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -45,9 +45,9 @@
                     <td>{{ $product->desc }}</td>
                     <td>{{ $product->tp }}</td>
                     <td>{{ $product->mrp }}</td>
-                    <td>{{ $product->unit->name }}</td>
+                    <td>{{ $product->p_size }}</td>
                     <td class="text-center d-flex justify-content-center align-items-center">
-                        <span onclick="edit({{$product->id}}, '{{$product->code}}', '{{$product->desc}}', {{$product->tp}}, {{$product->mrp}}, {{$product->unitID}})" class="text-info"><i class="fa fa-edit">Edit</i></span>
+                        <span onclick="edit({{$product->id}}, '{{$product->code}}', '{{$product->desc}}', {{$product->tp}}, {{$product->mrp}}, {{$product->p_size}})" class="text-info"><i class="fa fa-edit">Edit</i></span>
                     </td>
                 </tr>
                 @endforeach
@@ -84,13 +84,17 @@
                             <input type="number" name="mrp" step="any" id="mrp" class="form-control">
                         </div>
                         <div class="form-group col-md-6 mt-2">
+                            <label for="p_size">Pack Size</label>
+                            <input type="number" name="p_size" required min="1" id="p_size" class="form-control">
+                        </div>
+                       {{--  <div class="form-group col-md-6 mt-2">
                             <label for="unitID">Unit</label>
                             <select name="unitID" id="unitID" class="form-control">
                                 @foreach ($units as $unit)
                                     <option value="{{$unit->id}}">{{$unit->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -129,6 +133,10 @@
                         <label for="mrp">MRP</label>
                         <input type="number" name="mrp" step="any" id="edit_mrp" class="form-control">
                     </div>
+                    <div class="form-group col-md-6 mt-2">
+                        <label for="p_size">Pack Size</label>
+                        <input type="number" name="p_size" required min="1" id="edit_p_size" class="form-control">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -162,13 +170,14 @@
   <script src="{{ asset('src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
 
   <script>
-    function edit(id, code, desc, tp, mrp)
+    function edit(id, code, desc, tp, mrp, p_size)
     {
         $("#edit_id").val(id);
         $("#edit_desc").val(desc);
         $("#edit_code").val(code);
         $("#edit_tp").val(tp);
         $("#edit_mrp").val(mrp);
+        $("#edit_p_size").val(p_size);
         $("#editModal").modal("show");
     }
   </script>

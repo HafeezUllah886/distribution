@@ -256,6 +256,25 @@
                             </div>
                         </a>
                     </li>
+                    <li class="menu">
+                        <a href="#purchase" data-bs-toggle="dropdown" aria-expanded="true" class="dropdown-toggle">
+                            <div class="">
+                                <span>Sale</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu submenu list-unstyled" id="purchase" data-bs-parent="#accordionExample">
+                            <li class="active">
+                                <a href="{{ route('saleCreate') }}"> Create New </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('saleHistory') }}"> History </a>
+                            </li>
+                        </ul>
+
+                    </li>
 
                     <li class="menu">
                         <a href="#purchase" data-bs-toggle="dropdown" aria-expanded="true" class="dropdown-toggle">
@@ -312,7 +331,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu">
+                   {{--  <li class="menu">
                         <a href="{{route('unitIndex')}}" class="dropdown-toggle">
                             <div class="">
                                 <span>Units</span>
@@ -321,7 +340,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             </div>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="menu">
                         <a href="{{route('products')}}" class="dropdown-toggle">
                             <div class="">

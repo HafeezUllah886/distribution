@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderbookerController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SalesmanController;
 use App\Http\Controllers\StocksController;
 use App\Http\Controllers\TransferController;
@@ -36,7 +37,9 @@ Route::middleware('auth')->group(function (){
     Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchaseHistory');
     Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchaseCreate');
     Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchaseStore');
+    Route::post('/purchase/update', [PurchaseController::class, 'update'])->name('purchaseUpdate');
     Route::get('/purchase/view/{id}', [PurchaseController::class, 'show'])->name('purchaseView');
+    Route::get('/purchase/edit/{id}', [PurchaseController::class, 'edit'])->name('purchaseEdit');
     Route::get('/singleProduct/{id}', [PurchaseController::class, 'singleProduct'])->name('singleProduct');
 
     Route::get('/accounts/{filter?}', [AccountController::class, 'index'])->name('accountsIndex');
@@ -74,6 +77,14 @@ Route::middleware('auth')->group(function (){
     Route::get('/units', [UnitsController::class, 'index'])->name('unitIndex');
     Route::post('/units/store', [UnitsController::class, 'store'])->name('unitStore');
     Route::post('/units/update', [UnitsController::class, 'update'])->name('unitUpdate');
+
+    Route::get('/sales', [SalesController::class, 'index'])->name('saleHistory');
+    Route::get('/sale/create', [SalesController::class, 'create'])->name('saleCreate');
+    Route::post('/sale/store', [SalesController::class, 'store'])->name('saleStore');
+    Route::post('/sale/update', [SalesController::class, 'update'])->name('saleUpdate');
+    Route::get('/sale/view/{id}', [SalesController::class, 'show'])->name('saleView');
+    Route::get('/sale/edit/{id}', [SalesController::class, 'edit'])->name('saleEdit');
+    Route::get('/sale/singleProduct/{id}', [SalesController::class, 'singleProduct'])->name('saleSingleProduct');
 
 });
 

@@ -19,7 +19,7 @@ class productSeeder extends Seeder
                 'desc' => 'Product 2',
                 'tp' => '0',
                 'mrp' => '0',
-                'unitID' => 1,
+                'p_size' => 12,
             ]
         );
         products::create(
@@ -28,7 +28,7 @@ class productSeeder extends Seeder
                 'desc' => 'Product 3',
                 'tp' => '0',
                 'mrp' => '0',
-                'unitID' => 1,
+                'p_size' => 24,
             ]
         );
         products::create(
@@ -37,7 +37,7 @@ class productSeeder extends Seeder
                 'desc' => 'Product 1',
                 'tp' => '0',
                 'mrp' => '0',
-                'unitID' => 1,
+                'p_size' => 6,
             ]
         );
     }
