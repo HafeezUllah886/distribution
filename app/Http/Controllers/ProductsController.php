@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\products;
+use App\Models\units;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -10,7 +11,8 @@ class ProductsController extends Controller
     public function index()
     {
         $products = products::all();
-        return view('products.index',compact('products'));
+        $units = units::all();
+        return view('products.index',compact('products', 'units'));
     }
 
     public function store(request $req)

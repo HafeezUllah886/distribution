@@ -140,7 +140,7 @@
                                     <a href="#" class="btn btn-info btn-print action-print">Edit</a>
                                 </div>
                                 <div class="col-xl-12 col-md-3 col-sm-6">
-                                    <a href="#" class="btn btn-danger btn-print action-print">Delete</a>
+                                    <a href="{{route('purchaseDelete', $purchase->id)}}" class="btn btn-danger btn-print action-print">Delete</a>
                                 </div>
                             </div>
                         </div>

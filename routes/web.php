@@ -81,5 +81,5 @@ Route::middleware(['confirm.password'])->group(function () {
     Route::get('/transfer/delete/{ref}',[TransferController::class, 'delete'])->name('transferDelete');
     Route::get('/depositwithdraw/delete/{ref}',[DepositWithdrawController::class, 'delete'])->name('depositWithdrawDelete');
     Route::get('/expense/delete/{ref}',[ExpenseController::class, 'delete'])->name('expenseDelete');
-    Route::get('/purchase/delete/{ref}',[purchase::class, 'delete'])->name('purchaseDelete');
+    Route::get('/purchase/delete/{id}',[PurchaseController::class, 'delete'])->name('purchaseDelete');
 });

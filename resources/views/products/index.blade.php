@@ -33,6 +33,7 @@
                     <th>Description</th>
                     <th>TP</th>
                     <th>MRP</th>
+                    <th>Unit</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -44,8 +45,9 @@
                     <td>{{ $product->desc }}</td>
                     <td>{{ $product->tp }}</td>
                     <td>{{ $product->mrp }}</td>
+                    <td>{{ $product->unit->name }}</td>
                     <td class="text-center d-flex justify-content-center align-items-center">
-                        <span onclick="edit({{$product->id}}, '{{$product->code}}', '{{$product->desc}}', {{$product->tp}}, {{$product->mrp}})" class="text-info"><i class="fa fa-edit">Edit</i></span>
+                        <span onclick="edit({{$product->id}}, '{{$product->code}}', '{{$product->desc}}', {{$product->tp}}, {{$product->mrp}}, {{$product->unitID}})" class="text-info"><i class="fa fa-edit">Edit</i></span>
                     </td>
                 </tr>
                 @endforeach
@@ -55,7 +57,7 @@
 </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Create Product</h5>
@@ -64,21 +66,31 @@
             <form action="{{ route('productStore') }}" method="post">
                 <div class="modal-body">
                     @csrf
-                    <div class="form-group">
-                        <label for="code"> Code <span class="text-danger">*</span></label>
-                        <input name="code" id="code" required class="form-control">
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="desc">Description <span class="text-danger">*</span></label>
-                        <input type="text" name="desc" required id="desc" class="form-control">
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="tp">TP <span class="text-danger">*</span></label>
-                        <input type="number" name="tp" step="any" required id="tp" class="form-control">
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="mrp">MRP</label>
-                        <input type="number" name="mrp" step="any" id="mrp" class="form-control">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="code"> Code <span class="text-danger">*</span></label>
+                            <input name="code" id="code" required class="form-control">
+                        </div>
+                        <div class="form-group col-md-6 mt-2">
+                            <label for="desc">Description <span class="text-danger">*</span></label>
+                            <input type="text" name="desc" required id="desc" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6 mt-2">
+                            <label for="tp">TP <span class="text-danger">*</span></label>
+                            <input type="number" name="tp" step="any" required id="tp" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6 mt-2">
+                            <label for="mrp">MRP</label>
+                            <input type="number" name="mrp" step="any" id="mrp" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6 mt-2">
+                            <label for="unitID">Unit</label>
+                            <select name="unitID" id="unitID" class="form-control">
+                                @foreach ($units as $unit)
+                                    <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -16,6 +16,7 @@ class unitSeeder extends Seeder
         units::create(
             [
                 'name' => 'Nos',
+                'sym' => 'pc',
                 'value' => 1,
             ]
         );

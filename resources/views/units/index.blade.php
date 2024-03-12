@@ -30,6 +30,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Symbol</th>
                     <th>Value</th>
                     <th>Action</th>
                 </tr>
@@ -39,9 +40,10 @@
                 <tr>
                     <td>{{ $key+1 }}</td>
                     <td>{{ $unit->name }}</td>
+                    <td>{{ $unit->sym }}</td>
                     <td>{{ $unit->value }}</td>
                     <td class="text-center d-flex justify-content-center align-items-center">
-                        <span onclick="edit({{$unit->id}}, '{{$unit->name}}', '{{$unit->value}}')" class="text-info"><i class="fa fa-edit">Edit</i></span>
+                        <span onclick="edit({{$unit->id}}, '{{$unit->name}}','{{$unit->sym}}', '{{$unit->value}}')" class="text-info"><i class="fa fa-edit">Edit</i></span>
                     </td>
                 </tr>
                 @endforeach
@@ -65,8 +67,12 @@
                         <input type="text" name="name" required id="name" class="form-control">
                     </div>
                     <div class="form-group mt-2">
+                        <label for="sym">Symbol <span class="text-danger">*</span></label>
+                        <input type="text" name="sym" required id="sym" class="form-control">
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="value">Value <span class="text-danger">*</span></label>
-                        <input type="text" name="value" id="value" class="form-control">
+                        <input type="number" name="value" required id="value" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -94,8 +100,12 @@
                         <input type="text" name="name" required id="edit_name" class="form-control">
                     </div>
                     <div class="form-group mt-2">
+                        <label for="sym">Symbol <span class="text-danger">*</span></label>
+                        <input type="text" name="sym" required id="edit_sym" class="form-control">
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="value">Value <span class="text-danger">*</span></label>
-                        <input type="text" name="value" id="edit_value" class="form-control">
+                        <input type="number" name="value" id="edit_value" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -130,10 +140,11 @@
   <script src="{{ asset('src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
 
   <script>
-    function edit(id, name, value)
+    function edit(id, name, sym, value)
     {
         $("#edit_id").val(id);
         $("#edit_name").val(name);
+        $("#edit_sym").val(sym);
         $("#edit_value").val(value);
         $("#editModal").modal("show");
     }

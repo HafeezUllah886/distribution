@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('desc');
             $table->float('tp',10,2);
             $table->float('mrp')->default(0);
+            $table->foreignId('unitID')->constrained('units', 'id');
             $table->timestamps();
         });
     }

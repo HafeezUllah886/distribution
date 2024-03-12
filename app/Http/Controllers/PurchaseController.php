@@ -6,6 +6,8 @@ use App\Models\account;
 use App\Models\products;
 use App\Models\purchase;
 use App\Models\purchase_details;
+use App\Models\stocks;
+use App\Models\transactions;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -33,7 +35,7 @@ class PurchaseController extends Controller
     public function store(Request $req)
     {
        
-    $refID = getRef();
+    $ref = getRef();
 
     $purchase = purchase::create(
         [
@@ -42,7 +44,7 @@ class PurchaseController extends Controller
             'accountID'     => $req->accountID,
             'shippingCost'  => $req->shippingCost,
             'notes'         => $req->notes,
-            'refID'         => $refID,
+            'refID'         => $ref,
         ]
     );
         $products = $req->productID;
@@ -112,8 +114,8 @@ class PurchaseController extends Controller
             createStock($productID, $req->date, $qty, 0, "Purchased in $purchase->id", $refID);
         }
 
-        addTransaction($req->vendorID, $req->date, $total, $total, $refID, "Payment of Purchase ID $purchase->id");
-        addTransaction($req->accountID, $req->date, 0, $total + $req->shippingCost, $refID, "Payment of Purchase ID $purchase->id");
+        addTransaction($req->vendorID, $req->date, $total, $total, $ref, "Payment of Purchase ID $purchase->id");
+        addTransaction($req->accountID, $req->date, 0, $total + $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
 
         return redirect()->route('purchaseHistory')->with('success', 'Purchase Created');
     }
@@ -122,6 +124,21 @@ class PurchaseController extends Controller
     {
         $purchase = purchase::findOrFail($id);
         return view('purchase.show', compact('purchase'));
+    }
+
+    public function delete($id)
+    {
+        $purchase = purchase::findOrFail($id);
+        foreach($purchase->details as $item)
+        {
+            stocks::where('refID', $item->refID)->delete();
+            
+            purchase_details::where('refID', $item->refID)->delete();
+        }
+        transactions::where('refID', $purchase->refID)->delete();
+        $purchase->delete();
+
+        return redirect()->route('purchaseHistory')->with("error", "Purchase Deleted");
     }
    
 }
