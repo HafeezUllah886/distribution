@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->foreignId('customerID')->constrained('accounts', 'id');
-            
             $table->string('cell')->nullable();
+            $table->string('sign')->nullable();
             $table->text('notes')->nullable();
             $table->integer('refID');
             $table->timestamps();

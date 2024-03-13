@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <form action="{{route('purchaseStore')}}" method="post">
+    <form action="{{route('saleStore')}}" method="post">
         @csrf
         <div class="card mt-2">
             <div class="card-body">
@@ -96,20 +96,22 @@
         <div class="card mt-2">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label for="date">Date</label>
                             <input type="date" name="date" id="date" class="form-control" value="{{date('Y-m-d')}}">
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
-                            <label for="shippingCost">Delivery Charges</label>
-                            <input type="number" name="shippingCost" id="shippingCost" class="form-control" required value="0">
-                            <input type="hidden" name="customerID" id="customerID" class="form-control" value="{{$customer->id}}">
+                            <label for="payment">Payment Status</label>
+                            <select name="payment"  id="payment" class="form-control">
+                                    <option value="1">Received</option>
+                                    <option value="0">Pending</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label for="account">Account</label>
                             <select name="accountID" required id="account" class="form-control">
@@ -118,6 +120,19 @@
                                     <option value="{{$account->id}}">{{$account->name}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="cell">Cell</label>
+                            <input type="text" name="cell" id="cell" class="form-control">
+                            <input type="hidden" name="customerID" id="customerID" value="{{$customer->id}}">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="sign">Sign</label>
+                            <input type="text" name="sign" id="sign" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -148,7 +163,10 @@
     <script>
         $('.selectize').selectize({
             onChange: function(value) {
-                getSingleProduct(value);
+                if(value != "")
+                {
+                    getSingleProduct(value);
+                }
                 this.clear();
             }
         });
@@ -162,6 +180,7 @@
                 success: function(response) {
                     var product = response.product;
                     var productID = product.id;
+                    console.log(product.stock);
                     var gst = 18;
                     var fst = 4;
                     if(product.mrp > 0)
@@ -172,11 +191,10 @@
                     {
                         fst = 0;
                     }
-                    console.log(fst);
                     if (!existingProducts.includes(productID)) {
                         proHTML += '<tr id="row_'+productID+'">';
                             proHTML += '<td>'+product.desc+'</td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" value="1" required oninput="updateQty('+productID+')" name="qty[]" id="qty_'+productID+'"></td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" max="'+product.stock+'" value="1" required oninput="updateQty('+productID+')" name="qty[]" id="qty_'+productID+'"></td>';
                             proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="'+product.tp+'" required oninput="updateQty('+productID+')" name="price[]" id="price_'+productID+'"></td>';
                             proHTML += '<td>';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="rt_per_'+productID+'" value="0" name="rt_per[]">';
@@ -191,7 +209,7 @@
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="slb_val_'+productID+'" required value="0" name="slb_val[]">';
                             proHTML += '</td>';
                             
-                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="0" oninput="updateQty('+productID+')" required name="bonus[]" id="bonus_'+productID+'"></td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" value="0" oninput="updateQty('+productID+')" required name="bonus[]" id="bonus_'+productID+'"></td>';
                             proHTML += '<td>';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="deal_per_'+productID+'" value="0" name="deal_per[]">';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="deal_val_'+productID+'" required value="0" name="deal_val[]">';
