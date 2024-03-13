@@ -57,9 +57,11 @@
                             <th width="20%">Product</th>
                             <th class="text-center">Quantity</th>
                             <th class="text-center">Price</th>
-                            <th class="text-center">Dist</th>
+                            <th class="text-center">RT</th>
                             <th class="text-center">W/S</th>
-                            <th class="text-center">Sch</th>
+                            <th class="text-center">Slb</th>
+                            <th class="text-center">Bonus</th>
+                            <th class="text-center">Deal</th>
                             <th class="text-center">Gross</th>
                             <th class="text-center">GST</th>
                             <th class="text-center">MRP</th>
@@ -73,9 +75,11 @@
                         <tfoot>
                             <tr>
                                 <th colspan="3" class="text-end">Total</th>
-                                <th id="totalDist" class="text-center"></th>
+                                <th id="totalRT" class="text-center"></th>
                                 <th id="totalWS" class="text-center"></th>
-                                <th id="totalSch" class="text-center"></th>
+                                <th id="totalSlb" class="text-center"></th>
+                                <th class="text-center"></th>
+                                <th id="totalDeal" class="text-center"></th>
                                 <th id="totalGross" class="text-center"></th>
                                 <th id="totalGst" class="text-center"></th>
                                 <th id="totalMrp" class="text-center"></th>
@@ -102,17 +106,7 @@
                         <div class="form-group">
                             <label for="shippingCost">Delivery Charges</label>
                             <input type="number" name="shippingCost" id="shippingCost" class="form-control" required value="0">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="customer">Customer</label>
-                            <select name="customerID" required id="customer" class="form-control">
-                                <option value="">Select Customer</option>
-                                @foreach ($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                @endforeach
-                            </select>
+                            <input type="hidden" name="customerID" id="customerID" class="form-control" value="{{$customer->id}}">
                         </div>
                     </div>
                     <div class="col-3">
@@ -160,49 +154,62 @@
         });
         var existingProducts = [];
         function getSingleProduct(id) {
+            var customer = $("#customerID").val();
             var proHTML = "";
             $.ajax({
-                url: "{{ url('/singleProduct/') }}/" + id,
+                url: "{{ url('/sale/singleProduct/') }}/" + id +"/" +customer,
                 method: "GET",
-                success: function(product) {
+                success: function(response) {
+                    var product = response.product;
                     var productID = product.id;
                     var gst = 18;
+                    var fst = 4;
                     if(product.mrp > 0)
                     {
                         gst = 0;
                     }
-
+                    if(response.customer.ntn != null || response.customer.strn != null )
+                    {
+                        fst = 0;
+                    }
+                    console.log(fst);
                     if (!existingProducts.includes(productID)) {
                         proHTML += '<tr id="row_'+productID+'">';
                             proHTML += '<td>'+product.desc+'</td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" value="1" required oninput="updateQty('+productID+')" name="qty[]" id="qty_'+productID+'"></td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="'+product.tp+'" required oninput="updateQty('+productID+')" name="price[]" id="price_'+productID+'"></td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" value="1" required oninput="updateQty('+productID+')" name="qty[]" id="qty_'+productID+'"></td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="'+product.tp+'" required oninput="updateQty('+productID+')" name="price[]" id="price_'+productID+'"></td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="dist_per_'+productID+'" value="8" name="dist_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="dist_val_'+productID+'" required value="0" name="dist_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="rt_per_'+productID+'" value="0" name="rt_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="rt_val_'+productID+'" required value="0" name="rt_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="ws_per_'+productID+'" value="2" name="ws_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="ws_val_'+productID+'" required value="0" name="ws_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="ws_per_'+productID+'" value="0" name="ws_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="ws_val_'+productID+'" required value="0" name="ws_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="sch_per_'+productID+'" value="3" name="sch_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="sch_val_'+productID+'" required value="0" name="sch_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="slb_per_'+productID+'" value="0" name="slb_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="slb_val_'+productID+'" required value="0" name="slb_val[]">';
                             proHTML += '</td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="0" readonly required name="gross[]" id="gross_'+productID+'"></td>';
+                            
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="0" oninput="updateQty('+productID+')" required name="bonus[]" id="bonus_'+productID+'"></td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="gst_per_'+productID+'" value="'+gst+'" name="gst_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="gst_val_'+productID+'" required value="0" name="gst_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="deal_per_'+productID+'" value="0" name="deal_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="deal_val_'+productID+'" required value="0" name="deal_val[]">';
+                            proHTML += '</td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="0" readonly required name="gross[]" id="gross_'+productID+'"></td>';
+                            proHTML += '<td>';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="gst_per_'+productID+'" value="'+gst+'" name="gst_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="gst_val_'+productID+'" required value="0" name="gst_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="mrp_per_'+productID+'" value="'+product.mrp+'" name="mrp_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="mrp_val_'+productID+'" required value="0" name="mrp_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="mrp_per_'+productID+'" value="'+product.mrp+'" name="mrp_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="mrp_val_'+productID+'" required value="0" name="mrp_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="fst_per_'+productID+'" value="0" name="fst_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="fst_val_'+productID+'" required value="0" name="fst_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="fst_per_'+productID+'" value="'+fst+'" name="fst_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="fst_val_'+productID+'" required value="0" name="fst_val[]">';
                             proHTML += '</td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" readonly type="number" required value="0" id="amount_'+productID+'" name="amount[]"></td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" readonly type="number" required value="0" id="amount_'+productID+'" name="amount[]"></td>';
                             proHTML += '<td><span onclick="deleteRow('+productID+')">@svg("eos-delete", "text-danger")</span></td>';
                             proHTML += '<input type="hidden" value="'+productID+'" name="productID[]">';
                         proHTML += '</tr>';
@@ -231,35 +238,42 @@
                 }
         });
         var existingQty = $("#qty_"+id).val();
+        var bonus = $("#bonus_"+id).val();
+        var nQty = existingQty - bonus;
         var price = $("#price_"+id).val();
 
-        var g_price = existingQty * price;
+        var g_price = nQty * price;
 
-        var dist = $("#dist_per_"+id).val();
-        var dist_val = (g_price / 100) * dist;
+        var rt = $("#rt_per_"+id).val();
+        var rt_val = (g_price / 100) * rt;
 
         var ws = $("#ws_per_"+id).val();
         var ws_val = (g_price / 100) * ws;
 
-        var sch = $("#sch_per_"+id).val();
-        var sch_val = (g_price / 100) * sch;
+        var i_gross = g_price - rt_val - ws_val;
+        var slb = $("#slb_per_"+id).val();
+        var slb_val = (i_gross / 100) * slb;
 
-        var gross = g_price - dist_val - ws_val - sch_val;
+        var deal = $("#deal_per_"+id).val();
+        var deal_val = (g_price / 100) * deal;
+
+        var gross = g_price - rt_val - ws_val - slb_val - deal_val;
 
         var gst = $("#gst_per_"+id).val();
         var gst_val = (gross / 100) * gst;
 
         var mrp = $("#mrp_per_"+id).val();
-        var t_mrp = mrp * existingQty;
+        var t_mrp = mrp * nQty;
 
         var fst = $("#fst_per_"+id).val();
         var fst_val = (gross / 100) * fst;
 
         var amount = gross + gst_val + fst_val + t_mrp;
        
-        $("#dist_val_"+id).val(dist_val.toFixed(2));
+        $("#rt_val_"+id).val(rt_val.toFixed(2));
         $("#ws_val_"+id).val(ws_val.toFixed(2));
-        $("#sch_val_"+id).val(sch_val.toFixed(2));
+        $("#slb_val_"+id).val(slb_val.toFixed(2));
+        $("#deal_val_"+id).val(deal_val.toFixed(2));
         $("#gross_"+id).val(gross.toFixed(2));
         $("#gst_val_"+id).val(gst_val.toFixed(2));
         $("#fst_val_"+id).val(fst_val.toFixed(2));
@@ -269,33 +283,40 @@
         }
 
         function updateAmounts(){
-        var subTotal = 0;
-        var totalDist = 0;
-        var totalSch = 0;
+        
+        var totalRt = 0;
         var totalWs = 0;
+        var totalSlb = 0;
+        var totalDeal = 0;
+        var totalGross = 0;
         var totalGst = 0;
         var totalMrp = 0;
         var totalFst = 0;
-        var totalGross = 0;
+        var subTotal = 0;
         $("input[id^='amount_']").each(function() {
             var inputId = $(this).attr('id');
             var inputValue = $(this).val();
             subTotal += parseFloat(inputValue);
         });
-        $("input[id^='dist_val_']").each(function() {
+        $("input[id^='rt_val_']").each(function() {
             var inputId = $(this).attr('id');
             var inputValue = $(this).val();
-            totalDist += parseFloat(inputValue);
+            totalRt += parseFloat(inputValue);
         });
         $("input[id^='ws_val_']").each(function() {
             var inputId = $(this).attr('id');
             var inputValue = $(this).val();
             totalWs += parseFloat(inputValue);
         });
-        $("input[id^='sch_val_']").each(function() {
+        $("input[id^='slb_val_']").each(function() {
             var inputId = $(this).attr('id');
             var inputValue = $(this).val();
-            totalSch += parseFloat(inputValue);
+            totalSlb += parseFloat(inputValue);
+        });
+        $("input[id^='deal_val_']").each(function() {
+            var inputId = $(this).attr('id');
+            var inputValue = $(this).val();
+            totalDeal += parseFloat(inputValue);
         });
         $("input[id^='gst_val_']").each(function() {
             var inputId = $(this).attr('id');
@@ -322,9 +343,10 @@
         });
 
             $("#totalAmount").text(subTotal.toFixed(2));
-            $("#totalDist").text(totalDist.toFixed(2));
+            $("#totalRT").text(totalRt.toFixed(2));
             $("#totalWS").text(totalWs.toFixed(2));
-            $("#totalSch").text(totalSch.toFixed(2));
+            $("#totalSlb").text(totalSlb.toFixed(2));
+            $("#totalDeal").text(totalDeal.toFixed(2));
             $("#totalGst").text(totalGst.toFixed(2));
             $("#totalMrp").text(totalMrp.toFixed(2));
             $("#totalFst").text(totalFst.toFixed(2));

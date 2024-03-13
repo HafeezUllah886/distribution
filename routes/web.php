@@ -84,7 +84,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/sale/update', [SalesController::class, 'update'])->name('saleUpdate');
     Route::get('/sale/view/{id}', [SalesController::class, 'show'])->name('saleView');
     Route::get('/sale/edit/{id}', [SalesController::class, 'edit'])->name('saleEdit');
-    Route::get('/sale/singleProduct/{id}', [SalesController::class, 'singleProduct'])->name('saleSingleProduct');
+    Route::get('/sale/singleProduct/{id}/{customer}', [SalesController::class, 'singleProduct'])->name('saleSingleProduct');
 
 });
 

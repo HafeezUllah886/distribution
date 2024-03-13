@@ -33,7 +33,7 @@
                     <th>Vendor</th>
                     <th>Amount</th>
                     <th>Shipping Cost</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>

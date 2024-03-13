@@ -82,34 +82,34 @@
                             @endphp
                             <tr id="row_{{$productID}}">
                                 <td>{{$product->product->desc}}</td>
-                                <td><input class="form-control form-control-sm text-center" type="number" min="1"  value="{{$product->qty}}" required oninput="updateQty({{$productID}})" name="qty[]" id="qty_{{$productID}}"></td>
-                                <td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="{{$product->price}}" required oninput="updateQty({{$productID}})" name="price[]" id="price_{{$productID}}"></td>
+                                <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1"  value="{{$product->qty}}" required oninput="updateQty({{$productID}})" name="qty[]" id="qty_{{$productID}}"></td>
+                                <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="{{$product->price}}" required oninput="updateQty({{$productID}})" name="price[]" id="price_{{$productID}}"></td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="dist_per_{{$productID}}" value="8" name="dist_per[]">
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="dist_val_{{$productID}}" value="{{$product->dist_val}}" required  name="dist_val[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="dist_per_{{$productID}}" value="8" name="dist_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="dist_val_{{$productID}}" value="{{$product->dist_val}}" required  name="dist_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="ws_per_{{$productID}}" value="2" name="ws_per[]">
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="ws_val_{{$productID}}" required value="{{$product->ws_val}}" name="ws_val[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="ws_per_{{$productID}}" value="2" name="ws_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="ws_val_{{$productID}}" required value="{{$product->ws_val}}" name="ws_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="sch_per_{{$productID}}" value="3" name="sch_per[]">
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="sch_val_{{$productID}}" required value="{{$product->sch_val}}" name="sch_val[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="sch_per_{{$productID}}" value="3" name="sch_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="sch_val_{{$productID}}" required value="{{$product->sch_val}}" name="sch_val[]">
                                 </td>
-                                <td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="{{$product->gross}}" readonly required name="gross[]" id="gross_{{$productID}}"></td>
+                                <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="{{$product->gross}}" readonly required name="gross[]" id="gross_{{$productID}}"></td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="gst_per_{{$productID}}" value="{{$product->gst_per}}" name="gst_per[]">
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="gst_val_{{$productID}}" required value="{{$product->gst_val}}" name="gst_val[]">
-                                </td>
-                                <td>
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="mrp_per_{{$productID}}" value="{{$product->mrp_per}}" name="mrp_per[]">
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="mrp_val_{{$productID}}" required value="{{$product->mrp_val}}" name="mrp_val[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="gst_per_{{$productID}}" value="{{$product->gst_per}}" name="gst_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="gst_val_{{$productID}}" required value="{{$product->gst_val}}" name="gst_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="fst_per_{{$productID}}" value="0" name="fst_per[]">
-                                    <input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="fst_val_{{$productID}}" required value="{{$product->fst_val}}" name="fst_val[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="mrp_per_{{$productID}}" value="{{$product->mrp_per}}" name="mrp_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="mrp_val_{{$productID}}" required value="{{$product->mrp_val}}" name="mrp_val[]">
                                 </td>
-                                <td><input class="form-control form-control-sm text-center" readonly type="number" required value="{{$product->amount}}" id="amount_{{$productID}}" name="amount[]"></td>
+                                <td>
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="fst_per_{{$productID}}" value="0" name="fst_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="fst_val_{{$productID}}" required value="{{$product->fst_val}}" name="fst_val[]">
+                                </td>
+                                <td><input class="form-control form-control-sm text-center input-p-2" readonly type="number" required value="{{$product->amount}}" id="amount_{{$productID}}" name="amount[]"></td>
                                 <td><span onclick="deleteRow({{$productID}})">@svg("eos-delete", "text-danger")</span></td>
                                 <input type="hidden" value="{{$productID}}" name="productID[]">
                             </tr>
@@ -222,34 +222,34 @@
                     if (!existingProducts.includes(productID)) {
                         proHTML += '<tr id="row_'+productID+'">';
                             proHTML += '<td>'+product.desc+'</td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" value="1" required oninput="updateQty('+productID+')" name="qty[]" id="qty_'+productID+'"></td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="'+product.tp+'" required oninput="updateQty('+productID+')" name="price[]" id="price_'+productID+'"></td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" value="1" required oninput="updateQty('+productID+')" name="qty[]" id="qty_'+productID+'"></td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="'+product.tp+'" required oninput="updateQty('+productID+')" name="price[]" id="price_'+productID+'"></td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="dist_per_'+productID+'" value="8" name="dist_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="dist_val_'+productID+'" required value="0" name="dist_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="dist_per_'+productID+'" value="8" name="dist_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="dist_val_'+productID+'" required value="0" name="dist_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="ws_per_'+productID+'" value="2" name="ws_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="ws_val_'+productID+'" required value="0" name="ws_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="ws_per_'+productID+'" value="2" name="ws_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="ws_val_'+productID+'" required value="0" name="ws_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="sch_per_'+productID+'" value="3" name="sch_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="sch_val_'+productID+'" required value="0" name="sch_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="sch_per_'+productID+'" value="3" name="sch_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="sch_val_'+productID+'" required value="0" name="sch_val[]">';
                             proHTML += '</td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" type="number" min="1" step="any" value="0" readonly required name="gross[]" id="gross_'+productID+'"></td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="0" readonly required name="gross[]" id="gross_'+productID+'"></td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="gst_per_'+productID+'" value="'+gst+'" name="gst_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="gst_val_'+productID+'" required value="0" name="gst_val[]">';
-                            proHTML += '</td>';
-                            proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="mrp_per_'+productID+'" value="'+product.mrp+'" name="mrp_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="mrp_val_'+productID+'" required value="0" name="mrp_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="gst_per_'+productID+'" value="'+gst+'" name="gst_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="gst_val_'+productID+'" required value="0" name="gst_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="fst_per_'+productID+'" value="0" name="fst_per[]">';
-                                proHTML += '<input class="form-control form-control-sm text-center" type="number" min="0" readonly step="any" id="fst_val_'+productID+'" required value="0" name="fst_val[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="mrp_per_'+productID+'" value="'+product.mrp+'" name="mrp_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="mrp_val_'+productID+'" required value="0" name="mrp_val[]">';
                             proHTML += '</td>';
-                            proHTML += '<td><input class="form-control form-control-sm text-center" readonly type="number" required value="0" id="amount_'+productID+'" name="amount[]"></td>';
+                            proHTML += '<td>';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="fst_per_'+productID+'" value="0" name="fst_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="fst_val_'+productID+'" required value="0" name="fst_val[]">';
+                            proHTML += '</td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" readonly type="number" required value="0" id="amount_'+productID+'" name="amount[]"></td>';
                             proHTML += '<td><span onclick="deleteRow('+productID+')">@svg("eos-delete", "text-danger")</span></td>';
                             proHTML += '<input type="hidden" value="'+productID+'" name="productID[]">';
                         proHTML += '</tr>';

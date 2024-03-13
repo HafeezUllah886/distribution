@@ -20,8 +20,10 @@ class sales extends Model
         return $this->belongsTo(account::class, 'customerID');
     }
 
-    public function account()
+    public function payments()
     {
-        return $this->belongsTo(account::class, 'accountID');
+        return $this->hasMany(sale_payment::class, 'saleID');
     }
+
+    
 }
