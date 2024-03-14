@@ -149,10 +149,10 @@ class SalesController extends Controller
                 [
                     'salesID'    => $sale->id,
                     'accountID'  => $req->accountID,
-                    'date'      => $req->date,
-                    'amount'    => $total,
-                    'notes'     => 'Payment Received',
-                    'refID'     => $ref
+                    'date'       => $req->date,
+                    'amount'     => $total,
+                    'notes'      => 'Payment Received',
+                    'refID'      => $ref
                 ]
             );
             addTransaction($req->customerID, $req->date, 0, $total, $ref, "Payment of Sale # $sale->id");
@@ -160,6 +160,12 @@ class SalesController extends Controller
         }
 
         return redirect()->route('saleHistory')->with('success', 'Sale Created');
+    }
+
+    public function show($id)
+    {
+        $sale = sales::findOrFail($id);
+        return view('sale.show', compact('sale'));
     }
 
 }

@@ -22,7 +22,7 @@ class sales extends Model
 
     public function payments()
     {
-        return $this->hasMany(sale_payment::class, 'saleID');
+        return $this->hasMany(sale_payment::class, 'salesID');
     }
 
     

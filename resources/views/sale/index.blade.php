@@ -32,7 +32,9 @@
                     <th>Date</th>
                     <th>Customer</th>
                     <th>Amount</th>
-                   {{--  <th>Shipping Cost</th> --}}
+                    <th>Paid</th>
+                    <th>Due</th>
+                    <th>Status</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
@@ -43,25 +45,34 @@
                 @foreach ($sales as $key => $sale)
                 @php
                     $amount = $sale->details->sum('amount');
-                    $total += $amount
+                    $total += $amount;
+                    $due = $amount - $sale->payments->sum('amount');
                 @endphp
                 <tr>
                     <td>{{ $sale->id }}</td>
                     <td>{{ date("d M Y", strtotime($sale->date)) }}</td>
                     <td>{{ $sale->customer->name }}</td>
                     <td>{{ $amount }}</td>
-                    <td>{{ $sale->shippingCost }}</td>
+                    <td>{{ $sale->payments->sum('amount') }}</td>
+                    <td>{{ $due }}</td>
+                    <td>
+                        @if ($due > 0)
+                            <span class="badge badge-danger">Due</span>
+                        @else
+                            <span class="badge badge-success">Paid</span>
+                        @endif
+                    </td>
+                    
                     <td class="text-center d-flex justify-content-center align-items-center">
-                        <a href="{{route('saleView', $sale->id)}}" class="text-info">View</a>
-                        {{-- <div class="dropdown" style="position:absolute !important; z-index:1000;">
+                        <div class="dropdown" style="position:absolute !important; z-index:1000;">
                             <a class="dropdown-toggle" href="#" role="button" id="action_{{ $key }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="action_{{ $key }}">
-                                <a class="dropdown-item" href="{{ route('purchaseView', $purchase->id) }}">View</a>
+                                <a class="dropdown-item" href="{{ route('saleView', $sale->id) }}">View</a>
                                
                             </div>
-                        </div> --}}
+                        </div>
                     </td>
                 </tr>
                 @endforeach
