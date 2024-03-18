@@ -68,6 +68,7 @@ class accountsSeeder extends Seeder
                 'address' => 'Abc City',
                 'ntn' => '12345',
                 'strn' => '12345',
+                'channel' => 'Retailer',
             ]
         );
     }

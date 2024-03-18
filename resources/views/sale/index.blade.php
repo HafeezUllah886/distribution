@@ -94,7 +94,7 @@
                         <label for="customer">Customer </label>
                         <select name="customer" required id="customer" class="form-control">
                             @foreach ($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                <option value="{{$customer->id}}">{{$customer->name}} - {{$customer->channel}}</option>
                             @endforeach
                         </select>
                     </div>

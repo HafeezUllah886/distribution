@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('cnic')->nullable();
             $table->string('contact')->nullable();
             $table->string('address')->nullable();
+            $table->string('channel')->nullable();
             $table->string('ntn')->nullable();
             $table->string('strn')->nullable();
             $table->string('status')->default('Active');

@@ -42,6 +42,7 @@
                     <th>Name</th>
                     <th>Category</th>
                     <th>Business Name</th>
+                    <th>Channel</th>
                     <th>Balance</th>
                     <th>Action</th>
                 </tr>
@@ -56,6 +57,7 @@
                     <td>{{ $account->name }}</td>
                     <td>{{ $account->category }}</td>
                     <td>{{ $account->b_name }}</td>
+                    <td>{{ $account->channel }}</td>
                     <td>{{ getAccountBalance($account->id) }}</td>
                     <td class="text-center d-flex justify-content-center align-items-center">
                         <div class="dropdown" style="position:absolute !important; z-index:1000;">
@@ -65,7 +67,7 @@
                             <div class="dropdown-menu" aria-labelledby="action_{{ $key }}" >
                                 <a class="dropdown-item" href="{{ route('accountStatement', [$account->id, firstDayOfMonth(), lastDayOfMonth()]) }}">View Statement</a>
                                 @if ($account->category != "Discount")
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="edit({{ $account->id }}, '{{ $account->name }}', '{{ $account->category }}', '{{ $account->b_name }}', '{{ $account->cnic }}', '{{ $account->contact }}', '{{ $account->address }}' , '{{ $account->ntn }}', '{{ $account->strn }}')">Edit</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="edit({{ $account->id }}, '{{ $account->name }}', '{{ $account->category }}', '{{ $account->b_name }}', '{{ $account->cnic }}', '{{ $account->contact }}', '{{ $account->address }}' , '{{ $account->ntn }}', '{{ $account->strn }}', '{{ $account->channel }}')">Edit</a>
                                 @endif
                             </div>
                         </div>
@@ -124,6 +126,14 @@
                         <label for="strn">STRN No. </label>
                         <input type="text" name="strn" id="strn" class="form-control">
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="channel">channel</label>
+                        <select name="channel" id="channel" class="form-control">
+                            <option value="Retailer">Retailer</option>
+                            <option value="Wholesaler">Wholesaler</option>
+                            <option value="LMT">LMT</option>
+                        </select>
+                    </div>
                     <div class="form-group col-md-6 mt-2">
                         <label for="initial">Initial Amount </label>
                         <input type="number" name="initial" required value="0" id="initial" class="form-control">
@@ -178,6 +188,14 @@
                             <label for="strn">STRN No. </label>
                             <input type="text" name="strn" id="edit_strn" class="form-control">
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="channel">channel</label>
+                            <select name="channel" id="edit_channel" class="form-control">
+                                <option value="Retailer">Retailer</option>
+                                <option value="Wholesaler">Wholesaler</option>
+                                <option value="LMT">LMT</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -212,7 +230,7 @@
   <script src="{{ asset('src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
 
   <script>
-    function edit(id, name, category, b_name, cnic, contact, address, ntn, strn)
+    function edit(id, name, category, b_name, cnic, contact, address, ntn, strn, channel)
     {
         $("#edit_id").val(id);
         $("#edit_name").val(name);
@@ -222,6 +240,7 @@
         $("#edit_address").val(address);
         $("#edit_ntn").val(ntn);
         $("#edit_strn").val(strn);
+        $("#edit_channel").val(channel);
         $("#editModal").modal("show");
         if(category == "Business")
         {
@@ -231,6 +250,7 @@
             $("#edit_address").prop('disabled', 'true');
             $("#edit_ntn").prop('disabled', 'true');
             $("#edit_strn").prop('disabled', 'true');
+            $("#edit_channel").prop('disabled', 'true');
         }
         else if(category == "Vendor")
         {
@@ -240,6 +260,7 @@
             $("#edit_address").removeAttr('disabled');
             $("#edit_ntn").prop('disabled', 'true');
             $("#edit_strn").prop('disabled', 'true');
+            $("#edit_channel").prop('disabled', 'true');
         }
         else
         {
@@ -249,6 +270,7 @@
             $("#edit_address").removeAttr('disabled');
             $("#edit_ntn").removeAttr('disabled');
             $("#edit_strn").removeAttr('disabled');
+            $("#edit_channel").removeAttr('disabled');
         }
        
     }
@@ -272,6 +294,7 @@
             $("#address").prop('disabled', 'true');
             $("#ntn").prop('disabled', 'true');
             $("#strn").prop('disabled', 'true');
+            $("#channel").prop('disabled', 'true');
         }
         else if(category == "Vendor")
         {
@@ -281,6 +304,7 @@
             $("#address").removeAttr('disabled');
             $("#ntn").prop('disabled', 'true');
             $("#strn").prop('disabled', 'true');
+            $("#channel").prop('disabled', 'true');
         }
         else
         {
@@ -290,6 +314,7 @@
             $("#address").removeAttr('disabled');
             $("#ntn").removeAttr('disabled');
             $("#strn").removeAttr('disabled');
+            $("#channel").removeAttr('disabled');
         }
     }
   </script>

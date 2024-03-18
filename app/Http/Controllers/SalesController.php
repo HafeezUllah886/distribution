@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\account;
+use App\Models\orderbooker;
 use App\Models\products;
 use App\Models\sale_details;
 use App\Models\sale_payment;
 use App\Models\sales;
+use App\Models\salesman;
 use App\Models\stocks;
 use Illuminate\Http\Request;
 
@@ -30,8 +32,10 @@ class SalesController extends Controller
         }
         $accounts = account::where('category', 'Business')->get();
         $customer = account::findOrFail($req->customer);
+        $salemans = salesman::all();
+        $orderBookers = orderbooker::all();
      
-        return view('sale.create', compact('products', 'accounts', 'customer'));
+        return view('sale.create', compact('products', 'accounts', 'customer', 'salemans', 'orderBookers'));
     }
 
     public function singleProduct($id, $customer)

@@ -19,7 +19,7 @@
                 <div class="d-flex breadcrumb-content">
                     <div class="page-header">
                         <div class="page-title">
-                            <h3>Create Sale</h3>
+                            <h3>Create Sale - {{$customer->name}} | {{$customer->channel}}</h3>
                         </div>
                     </div>
                 </div>
@@ -60,8 +60,8 @@
                             <th class="text-center">RT</th>
                             <th class="text-center">W/S</th>
                             <th class="text-center">Slb</th>
-                            <th class="text-center">Bonus</th>
                             <th class="text-center">Deal</th>
+                            <th class="text-center">Bonus</th>
                             <th class="text-center">Gross</th>
                             <th class="text-center">GST</th>
                             <th class="text-center">MRP</th>
@@ -78,8 +78,8 @@
                                 <th id="totalRT" class="text-center"></th>
                                 <th id="totalWS" class="text-center"></th>
                                 <th id="totalSlb" class="text-center"></th>
-                                <th class="text-center"></th>
                                 <th id="totalDeal" class="text-center"></th>
+                                <th class="text-center"></th>
                                 <th id="totalGross" class="text-center"></th>
                                 <th id="totalGst" class="text-center"></th>
                                 <th id="totalMrp" class="text-center"></th>
@@ -118,6 +118,28 @@
                                 <option value="">Select Receiving Account</option>
                                 @foreach ($accounts as $account)
                                     <option value="{{$account->id}}">{{$account->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="salesman">Sales Man</label>
+                            <select name="salesman" required id="salesman" class="form-control">
+                                <option value="">Select Sales Man</option>
+                                @foreach ($salemans as $man)
+                                    <option value="{{$man->id}}">{{$man->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="orderbooker">Order Booker</label>
+                            <select name="orderbooker" required id="orderbooker" class="form-control">
+                                <option value="">Select Order Booker</option>
+                                @foreach ($orderBookers as $booker)
+                                    <option value="{{$booker->id}}">{{$booker->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -208,12 +230,11 @@
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="slb_per_'+productID+'" value="0" name="slb_per[]">';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="slb_val_'+productID+'" required value="0" name="slb_val[]">';
                             proHTML += '</td>';
-                            
-                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" value="0" oninput="updateQty('+productID+')" required name="bonus[]" id="bonus_'+productID+'"></td>';
                             proHTML += '<td>';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="deal_per_'+productID+'" value="0" name="deal_per[]">';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="deal_val_'+productID+'" required value="0" name="deal_val[]">';
                             proHTML += '</td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" value="0" oninput="updateQty('+productID+')" required name="bonus[]" id="bonus_'+productID+'"></td>';
                             proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="0" readonly required name="gross[]" id="gross_'+productID+'"></td>';
                             proHTML += '<td>';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="gst_per_'+productID+'" value="'+gst+'" name="gst_per[]">';
@@ -273,7 +294,7 @@
         var slb_val = (i_gross / 100) * slb;
 
         var deal = $("#deal_per_"+id).val();
-        var deal_val = (g_price / 100) * deal;
+        var deal_val = (i_gross / 100) * deal;
 
         var gross = g_price - rt_val - ws_val - slb_val - deal_val;
 
