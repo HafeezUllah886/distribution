@@ -18,7 +18,8 @@ class SalesController extends Controller
     {
         $sales = sales::orderBy('id', 'desc')->get();
         $customers = account::where('category', 'Customer')->get();
-        return view('sale.index', compact('sales', 'customers'));
+        $accounts = account::where('category', 'Business')->get();
+        return view('sale.index', compact('sales', 'customers', 'accounts'));
     }
 
     public function create(request $req)

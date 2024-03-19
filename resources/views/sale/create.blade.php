@@ -202,7 +202,6 @@
                 success: function(response) {
                     var product = response.product;
                     var productID = product.id;
-                    console.log(product.stock);
                     var gst = 18;
                     var fst = 4;
                     if(product.mrp > 0)

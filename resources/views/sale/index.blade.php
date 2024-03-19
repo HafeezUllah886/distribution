@@ -45,15 +45,16 @@
                 @foreach ($sales as $key => $sale)
                 @php
                     $amount = $sale->details->sum('amount');
+                    $paid = $sale->payments->sum('amount');
+                    $due = ($amount - $paid);
                     $total += $amount;
-                    $due = $amount - $sale->payments->sum('amount');
                 @endphp
                 <tr>
                     <td>{{ $sale->id }}</td>
                     <td>{{ date("d M Y", strtotime($sale->date)) }}</td>
                     <td>{{ $sale->customer->name }}</td>
                     <td>{{ $amount }}</td>
-                    <td>{{ $sale->payments->sum('amount') }}</td>
+                    <td>{{ $paid }}</td>
                     <td>{{ $due }}</td>
                     <td>
                         @if ($due > 0)
@@ -70,7 +71,10 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="action_{{ $key }}">
                                 <a class="dropdown-item" href="{{ route('saleView', $sale->id) }}">View</a>
-                               
+                                <a class="dropdown-item" href="#" onclick="viewPayment('{{$sale->id}}')">View Payment</a>
+                                @if($due > 0)
+                                    <a class="dropdown-item" href="#" onclick="createPayment('{{$sale->id}}', {{$due}})">Create Payment</a>
+                                @endif
                             </div>
                         </div>
                     </td>
@@ -107,6 +111,75 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="viewPayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View Payments - <span id="viewPaymentTitle"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <th>Date</th>
+                            <th>Account</th>
+                            <th>Notes</th>
+                            <th>Amount</th>
+                            <th></th>
+                        </thead>
+                        <tbody id="viewPaymentTable">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                {{-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div> --}}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createPayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('salePaymentStore') }}" method="post">
+                <div class="modal-body">
+                    @csrf
+                    <input type="hidden" name="salesID" id="salesID" value="">
+                    <div class="form-group">
+                        <label for="account">Account </label>
+                        <select name="accountID" required id="account" class="form-control">
+                            @foreach ($accounts as $account)
+                                <option value="{{$account->id}}">{{$account->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="date" class="form-control" value="{{date('Y-m-d')}}">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="amount">Amount</label>
+                        <input type="number" name="amount" step="any" id="amount" required class="form-control">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="notes">Notes</label>
+                        <textarea name="notes" id="notes" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!--  END BREADCRUMBS  -->
 
 @endsection
@@ -129,4 +202,48 @@
   <script src="{{ asset('src/plugins/src/table/datatable/button-ext/buttons.print.min.js') }}"></script>
   <script src="{{ asset('src/plugins/src/table/datatable/button-ext/buttons.html5.min.js') }}"></script>
   <script src="{{ asset('src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
+
+  <script>
+    function viewPayment(id)
+    {
+        $.ajax({
+            url : "{{url('/sale/payments/view/')}}/"+id,
+            method : "GET",
+            success : function (payments){
+                var paymentHTML = "";
+                $.each(payments, function(index, payment) {
+                    paymentHTML += '<tr id="row_'+payment.refID+'">';
+                    paymentHTML += '<td>'+payment.date+'</td>';
+                    paymentHTML += '<td>'+payment.account.name+'</td>';
+                    paymentHTML += '<td>'+payment.notes+'</td>';
+                    paymentHTML += '<td>'+payment.amount+'</td>';
+                    paymentHTML += '<td><a href="#" onclick="paymentDelete('+payment.refID+')">@svg("eos-delete", "text-danger")</a></td>';
+                    paymentHTML += '</tr>';
+                });
+                $("#viewPaymentTable").html(paymentHTML);
+                $("#viewPaymentTitle").text(id);
+                $("#viewPayment").modal('show');
+            }
+        });
+    }
+
+    function paymentDelete(ref)
+    {
+        $.ajax({
+            url : "{{url('/sale/payments/delete/')}}/"+ref,
+            method : "GET",
+            success : function (){
+                location.reload();
+            }
+        });
+    }
+
+    function createPayment(id, amount)
+    {
+        $("#salesID").val(id);
+        $("#amount").val(amount);
+        $("#amount").prop("max", amount);
+        $("#createPayment").modal('show');
+    }
+  </script>
 @endsection

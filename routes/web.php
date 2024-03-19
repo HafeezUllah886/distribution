@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderbookerController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SalePaymentController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SalesmanController;
 use App\Http\Controllers\StocksController;
@@ -85,6 +86,10 @@ Route::middleware('auth')->group(function (){
     Route::get('/sale/view/{id}', [SalesController::class, 'show'])->name('saleView');
     Route::get('/sale/edit/{id}', [SalesController::class, 'edit'])->name('saleEdit');
     Route::get('/sale/singleProduct/{id}/{customer}', [SalesController::class, 'singleProduct'])->name('saleSingleProduct');
+
+    Route::get('/sale/payments/view/{id}', [SalePaymentController::class, 'payments'])->name('salePaymentsView');
+    Route::get('/sale/payments/delete/{ref}', [SalePaymentController::class, 'delete'])->name('salePaymentDelete');
+    Route::post('/sale/payments/store', [SalePaymentController::class, 'store'])->name('salePaymentStore');
 
 });
 
