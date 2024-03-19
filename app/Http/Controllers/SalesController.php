@@ -60,12 +60,14 @@ class SalesController extends Controller
 
     $sale = sales::create(
         [
-            'date'          => $req->date,
-            'customerID'    => $req->customerID,
-            'cell'          => $req->cell,
-            'sign'          => $req->sign,
-            'notes'         => $req->notes,
-            'refID'         => $ref,
+            'date'              => $req->date,
+            'customerID'        => $req->customerID,
+            'salesmenID'        => $req->salesman,
+            'orderbookerID'     => $req->orderbooker,
+            'cell'              => $req->cell,
+            'sign'              => $req->sign,
+            'notes'             => $req->notes,
+            'refID'             => $ref,
         ]
     );
         $products = $req->productID;

@@ -28,15 +28,22 @@
                                         </div>
                                         <div class="inv--detail-section inv--customer-detail-section">
                                             <div class="row">
-                                                <div class="col-12 align-self-center">
+                                                <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
                                                     <p class="inv-to">Invoice To</p>
                                                 </div>
-                                                <div class="col-12">
+                                                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 text-sm-end mt-sm-0 mt-5">
+                                                    <h6 class=" inv-title"></h6>
+                                                </div>
+                                                <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
                                                     <p class="inv-customer-name">{{$sale->customer->name}}</p>
                                                     <p class="inv-street-addr">{{$sale->customer->b_name}}</p>
                                                     <p class="inv-street-addr">{{$sale->customer->address}}</p>
                                                     <p class="inv-email-address">{{$sale->customer->contact}}</p>
                                                     <p class="inv-street-addr">NTN No. {{$sale->customer->ntn ?? " - "}} | STRN No. {{$sale->customer->ntn ?? " - "}}</p>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1 text-sm-end">
+                                                    <p class="inv-street-addr">Sales Man : {{$sale->salesmen->name}}</p>
+                                                    <p class="inv-street-addr">Order Booker : {{$sale->orderbooker->name}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,8 +58,8 @@
                                                 <th>RT</th>
                                                 <th>W/S</th>
                                                 <th>SLB</th>
-                                                <th>Bonus</th>
                                                 <th>Deal</th>
+                                                <th>Bonus</th>
                                                 <th>Gross</th>
                                                 <th>GST</th>
                                                 <th>MRP</th>
@@ -70,8 +77,8 @@
                                                     <td>{{number_format($product->rt_val,0)}}({{$product->rt_per}}%)</td>
                                                     <td>{{number_format($product->ws_val,0)}}({{$product->ws_per}}%)</td>
                                                     <td>{{number_format($product->slb_val,0)}}({{$product->slb_per}}%)</td>
-                                                    <td>{{number_format($product->bonus,0)}}</td>
                                                     <td>{{number_format($product->deal_val,0)}}({{$product->deal_per}}%)</td>
+                                                    <td>{{number_format($product->bonus,0)}}</td>
                                                     <td>{{number_format($product->gross, 0)}}</td>
                                                     <td>{{number_format($product->gst_val,0)}}({{$product->gst_per}}%)</td>
                                                     <td>{{number_format($product->mrp_val,0)}}({{$product->mrp_per}})</td>
@@ -85,8 +92,8 @@
                                                 <th>{{number_format($sale->details->sum('rt_val'),0)}}</th>
                                                 <th>{{number_format($sale->details->sum('ws_val'),0)}}</th>
                                                 <th>{{number_format($sale->details->sum('slb_val'),0)}}</th>
-                                                <th></th>
                                                 <th>{{number_format($sale->details->sum('deal_val'),0)}}</th>
+                                                <th></th>
                                                 <th>{{number_format($sale->details->sum('gross'),0)}}</th>
                                                 <th>{{number_format($sale->details->sum('gst_val'),0)}}</th>
                                                 <th>{{number_format($sale->details->sum('mrp_val'),0)}}</th>

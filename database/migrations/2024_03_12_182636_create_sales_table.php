@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->foreignId('customerID')->constrained('accounts', 'id');
-            $table->foreignId('orderbooker')->constrained('orderbookers', 'id');
-            $table->foreignId('salesmen')->constrained('salesmen', 'id');
+            $table->foreignId('orderbookerID')->constrained('orderbookers', 'id');
+            $table->foreignId('salesmenID')->constrained('salesmen', 'id');
             $table->string('cell')->nullable();
             $table->string('sign')->nullable();
             $table->text('notes')->nullable();

@@ -18,6 +18,8 @@ class usersSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@email.com',
             'password' => Hash::make('admin'),
+            'sign' => "Test Sign",
+            'Cell' => "03450430432"
         ]);
     }
 }

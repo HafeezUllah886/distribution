@@ -40,6 +40,18 @@
                         <input type="email" name="email" id="email" value="{{ auth()->user()->email }}" placeholder="Enter email address" required class="form-control">
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="sign">Sign</label>
+                        <input type="text" name="sign" id="sign" value="{{ auth()->user()->sign }}" placeholder="Enter Bill Signing Name" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cell">Cell</label>
+                        <input type="text" name="cell" id="cell" value="{{ auth()->user()->cell }}" placeholder="Enter Cell Number" class="form-control">
+                    </div>
+                </div>
                 <div class="col-12 mt-2 d-flex justify-content-end">
                     <button type="submit" class="btn btn-success">Update</button>
                 </div>

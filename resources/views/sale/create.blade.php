@@ -147,14 +147,14 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label for="cell">Cell</label>
-                            <input type="text" name="cell" id="cell" class="form-control">
+                            <input type="text" name="cell" id="cell" value="{{auth()->user()->cell}}" class="form-control">
                             <input type="hidden" name="customerID" id="customerID" value="{{$customer->id}}">
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
                             <label for="sign">Sign</label>
-                            <input type="text" name="sign" id="sign" class="form-control">
+                            <input type="text" name="sign" value="{{auth()->user()->sign}}" id="sign" class="form-control">
                         </div>
                     </div>
                 </div>

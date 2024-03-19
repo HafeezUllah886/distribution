@@ -18,6 +18,8 @@ class profileController extends Controller
         $user = User::find(auth()->user()->id);
         $user->name = $req->name;
         $user->email = $req->email;
+        $user->sign = $req->sign;
+        $user->cell = $req->cell;
         $user->save();
 
         return redirect()->route('logout')->with('success', "Profile Updated Successfully");
