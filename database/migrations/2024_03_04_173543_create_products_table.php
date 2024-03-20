@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('desc');
             $table->float('tp',10,2);
             $table->float('mrp')->default(0);
+            $table->float('retail', 5,2)->default(0);
             $table->float('p_size')->default(0);
             $table->timestamps();
         });

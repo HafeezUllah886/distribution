@@ -207,6 +207,7 @@
                     if(product.mrp > 0)
                     {
                         gst = 0;
+                        fst = 0;
                     }
                     if(response.customer.ntn != null || response.customer.strn != null )
                     {
@@ -218,7 +219,7 @@
                             proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" max="'+product.stock+'" value="1" required oninput="updateQty('+productID+')" name="qty[]" id="qty_'+productID+'"></td>';
                             proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="'+product.tp+'" required oninput="updateQty('+productID+')" name="price[]" id="price_'+productID+'"></td>';
                             proHTML += '<td>';
-                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="rt_per_'+productID+'" value="0" name="rt_per[]">';
+                                proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="rt_per_'+productID+'" value="'+product.retail+'" name="rt_per[]">';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="rt_val_'+productID+'" required value="0" name="rt_val[]">';
                             proHTML += '</td>';
                             proHTML += '<td>';

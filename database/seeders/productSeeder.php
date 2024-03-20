@@ -17,8 +17,9 @@ class productSeeder extends Seeder
             [
                 'code' => '7848945',
                 'desc' => 'Product 2',
-                'tp' => '0',
+                'tp' => '312',
                 'mrp' => '0',
+                'retail' => 2.00,
                 'p_size' => 12,
             ]
         );
@@ -26,8 +27,9 @@ class productSeeder extends Seeder
             [
                 'code' => '95452648',
                 'desc' => 'Product 3',
-                'tp' => '0',
+                'tp' => '240',
                 'mrp' => '0',
+                'retail' => 2.00,
                 'p_size' => 24,
             ]
         );
@@ -35,8 +37,9 @@ class productSeeder extends Seeder
             [
                 'code' => '12548648',
                 'desc' => 'Product 1',
-                'tp' => '0',
-                'mrp' => '0',
+                'tp' => '135',
+                'mrp' => '249',
+                'retail' => 2.00,
                 'p_size' => 6,
             ]
         );

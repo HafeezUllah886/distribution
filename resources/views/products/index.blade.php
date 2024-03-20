@@ -33,6 +33,7 @@
                     <th>Description</th>
                     <th>TP</th>
                     <th>MRP</th>
+                    <th>Retail</th>
                     <th>Pack Size</th>
                     <th>Action</th>
                 </tr>
@@ -45,9 +46,10 @@
                     <td>{{ $product->desc }}</td>
                     <td>{{ $product->tp }}</td>
                     <td>{{ $product->mrp }}</td>
+                    <td>{{ $product->retail }}</td>
                     <td>{{ $product->p_size }}</td>
                     <td class="text-center d-flex justify-content-center align-items-center">
-                        <span onclick="edit({{$product->id}}, '{{$product->code}}', '{{$product->desc}}', {{$product->tp}}, {{$product->mrp}}, {{$product->p_size}})" class="text-info"><i class="fa fa-edit">Edit</i></span>
+                        <span onclick="edit({{$product->id}}, '{{$product->code}}', '{{$product->desc}}', {{$product->tp}}, {{$product->mrp}},{{$product->retail}}, {{$product->p_size}})" class="text-info"><i class="fa fa-edit">Edit</i></span>
                     </td>
                 </tr>
                 @endforeach
@@ -82,6 +84,10 @@
                         <div class="form-group col-md-6 mt-2">
                             <label for="mrp">MRP</label>
                             <input type="number" name="mrp" step="any" id="mrp" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6 mt-2">
+                            <label for="retail">Retail</label>
+                            <input type="number" name="retail" step="any" id="retail" class="form-control">
                         </div>
                         <div class="form-group col-md-6 mt-2">
                             <label for="p_size">Pack Size</label>
@@ -133,7 +139,11 @@
                         <label for="mrp">MRP</label>
                         <input type="number" name="mrp" step="any" id="edit_mrp" class="form-control">
                     </div>
-                    <div class="form-group col-md-6 mt-2">
+                    <div class="form-group mt-2">
+                        <label for="retail">Retail</label>
+                        <input type="number" name="retail" step="any" id="edit_retail" class="form-control">
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="p_size">Pack Size</label>
                         <input type="number" name="p_size" required min="1" id="edit_p_size" class="form-control">
                     </div>
@@ -170,13 +180,14 @@
   <script src="{{ asset('src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
 
   <script>
-    function edit(id, code, desc, tp, mrp, p_size)
+    function edit(id, code, desc, tp, mrp, retail, p_size)
     {
         $("#edit_id").val(id);
         $("#edit_desc").val(desc);
         $("#edit_code").val(code);
         $("#edit_tp").val(tp);
         $("#edit_mrp").val(mrp);
+        $("#edit_retail").val(retail);
         $("#edit_p_size").val(p_size);
         $("#editModal").modal("show");
     }

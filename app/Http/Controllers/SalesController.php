@@ -175,4 +175,21 @@ class SalesController extends Controller
         return view('sale.show', compact('sale'));
     }
 
+    public function edit($id)
+    {
+        $sale = sales::findOrFail($id);
+        $products = products::all();
+        foreach($products as $product)
+        {
+            $cr = stocks::where('productID', $product->id)->sum('cr');
+            $db = stocks::where('productID', $product->id)->sum('db');
+            $product->stock = $cr - $db;
+        }
+        $accounts = account::where('category', 'Business')->get();
+        $customers = account::where('category', 'Customer')->get();
+        $salemans = salesman::all();
+        $orderBookers = orderbooker::all();
+        return view('sale.edit', compact('sale', 'products', 'accounts', 'customers', 'salemans', 'orderBookers'));
+    }
+
 }
