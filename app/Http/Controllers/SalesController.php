@@ -10,6 +10,7 @@ use App\Models\sale_payment;
 use App\Models\sales;
 use App\Models\salesman;
 use App\Models\stocks;
+use App\Models\transactions;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
@@ -35,7 +36,7 @@ class SalesController extends Controller
         $customer = account::findOrFail($req->customer);
         $salemans = salesman::all();
         $orderBookers = orderbooker::all();
-     
+
         return view('sale.create', compact('products', 'accounts', 'customer', 'salemans', 'orderBookers'));
     }
 
@@ -56,7 +57,7 @@ class SalesController extends Controller
 
     public function store(Request $req)
     {
-       
+
     $ref = getRef();
 
     $sale = sales::create(
@@ -90,7 +91,7 @@ class SalesController extends Controller
             $slb_val        = $req->slb_val[$key];
 
             $bonus          = $req->bonus[$key];
-            
+
             $deal_per       = $req->deal_per[$key];
             $deal_val       = $req->deal_val[$key];
 
@@ -190,6 +191,131 @@ class SalesController extends Controller
         $salemans = salesman::all();
         $orderBookers = orderbooker::all();
         return view('sale.edit', compact('sale', 'products', 'accounts', 'customers', 'salemans', 'orderBookers'));
+    }
+
+    public function update(request $req)
+    {
+        $old_sale = sales::findOrFail($req->saleID);
+        foreach($old_sale->details as $item)
+        {
+            stocks::where('refID', $item->refID)->delete();
+            sale_details::where('refID', $item->refID)->delete();
+        }
+        foreach($old_sale->payments as $payment)
+        {
+            transactions::where('refID', $payment->refID)->delete();
+            $payment->delete();
+        }
+
+        $old_sale->update(
+            [
+                'date'              => $req->date,
+                'salesmenID'        => $req->salesman,
+                'orderbookerID'     => $req->orderbooker,
+                'cell'              => $req->cell,
+                'sign'              => $req->sign,
+                'notes'             => $req->notes,
+            ]
+        );
+
+        $products = $req->productID;
+        $total = 0;
+        $products = $req->productID;
+        $total = 0;
+        foreach($products as $key => $product)
+        {
+            $refID          = getRef();
+            $productID      = $req->productID[$key];
+            $qty            = $req->qty[$key];
+            $price          = $req->price[$key];
+
+            $rt_per         = $req->rt_per[$key];
+            $rt_val         = $req->rt_val[$key];
+
+            $ws_per         = $req->ws_per[$key];
+            $ws_val         = $req->ws_val[$key];
+
+            $slb_per        = $req->slb_per[$key];
+            $slb_val        = $req->slb_val[$key];
+
+            $bonus          = $req->bonus[$key];
+
+            $deal_per       = $req->deal_per[$key];
+            $deal_val       = $req->deal_val[$key];
+
+            $gross          = $req->gross[$key];
+
+            $gst_per        = $req->gst_per[$key];
+            $gst_val        = $req->gst_val[$key];
+
+            $mrp_per        = $req->mrp_per[$key];
+            $mrp_val        = $req->mrp_val[$key];
+
+            $fst_per        = $req->fst_per[$key];
+            $fst_val        = $req->fst_val[$key];
+
+            $amount         = $req->amount[$key];
+            $total         += $amount;
+            sale_details::create(
+                [
+                    'salesID'       => $old_sale->id,
+                    'productID'     => $productID,
+                    'qty'           => $qty,
+                    'price'         => $price,
+
+                    'rt_per'        => $rt_per,
+                    'rt_val'        => $rt_val,
+
+                    'ws_per'        => $ws_per,
+                    'ws_val'        => $ws_val,
+
+                    'slb_per'       => $slb_per,
+                    'slb_val'       => $slb_val,
+
+                    'bonus'         => $bonus,
+
+                    'deal_per'      => $deal_per,
+                    'deal_val'      => $deal_val,
+
+                    'gross'         => $gross,
+
+                    'gst_per'       => $gst_per,
+                    'gst_val'       => $gst_val,
+
+                    'mrp_per'       => $mrp_per,
+                    'mrp_val'       => $mrp_val,
+
+                    'fst_per'       => $fst_per,
+                    'fst_val'       => $fst_val,
+
+                    'amount'        => $amount,
+                    'unit_price'    => $amount/$qty,
+                    'date'          => $req->date,
+                    'refID'         => $refID,
+                ]
+            );
+
+            createStock($productID, $req->date, 0, $qty, "Sold in Bill # $old_sale->id,", $refID);
+        }
+        addTransaction($req->customerID, $req->date, $total, 0, $old_sale->refID, "Pending of Sale # $old_sale->id,");
+
+        if($req->payment == 1)
+        {
+            sale_payment::create(
+                [
+                    'salesID'    => $old_sale->id,
+                    'accountID'  => $req->accountID,
+                    'date'       => $req->date,
+                    'amount'     => $total,
+                    'notes'      => 'Payment Received',
+                    'refID'      => $old_sale->refID
+                ]
+            );
+            addTransaction($req->customerID, $req->date, 0, $total, $old_sale->refID, "Payment of Sale # $old_sale->id");
+            addTransaction($req->accountID, $req->date, $total, 0, $old_sale->refID, "Payment of Sale # $old_sale->id");
+        }
+
+        return redirect()->route('saleHistory')->with('success', 'Sale Updated');
     }
 
 }

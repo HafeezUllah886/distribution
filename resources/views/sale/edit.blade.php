@@ -201,6 +201,7 @@
                             <label for="cell">Cell</label>
                             <input type="text" name="cell" id="cell" value="{{$sale->cell}}" class="form-control">
                             <input type="hidden" name="customerID" id="customerID" value="{{$sale->customerID}}">
+                            <input type="hidden" name="saleID" id="saleID" value="{{$sale->id}}">
                         </div>
                     </div>
                     <div class="col-3">
@@ -235,7 +236,7 @@
 @section('more-js')
     <script src="{{ asset('src/plugins/src/selectize/selectize.min.js') }}"></script>
     <script>
-        
+
         $('.selectize').selectize({
             onChange: function(value) {
                 if(value != "")
@@ -308,7 +309,7 @@
                         $("#list").prepend(proHTML);
                         existingProducts.push(productID);
                         updateQty(productID)
-                        $('input[id^="qty_"]:first').focus().select();   
+                        $('input[id^="qty_"]:first').focus().select();
                     }
                     else
                     {
@@ -361,7 +362,7 @@
         var fst_val = (gross / 100) * fst;
 
         var amount = gross + gst_val + fst_val + t_mrp;
-       
+
         $("#rt_val_"+id).val(rt_val.toFixed(2));
         $("#ws_val_"+id).val(ws_val.toFixed(2));
         $("#slb_val_"+id).val(slb_val.toFixed(2));
@@ -371,11 +372,11 @@
         $("#fst_val_"+id).val(fst_val.toFixed(2));
         $("#mrp_val_"+id).val(t_mrp.toFixed(2));
         $("#amount_"+id).val(amount.toFixed(2));
-        updateAmounts(); 
+        updateAmounts();
         }
 
         function updateAmounts(){
-        
+
         var totalRt = 0;
         var totalWs = 0;
         var totalSlb = 0;
