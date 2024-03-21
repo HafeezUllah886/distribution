@@ -318,4 +318,21 @@ class SalesController extends Controller
         return redirect()->route('saleHistory')->with('success', 'Sale Updated');
     }
 
+    public function delete($id)
+    {
+        $sale = sales::findOrFail($id);
+        foreach($sale->details as $item)
+        {
+            stocks::where('refID', $item->refID)->delete();
+            sale_details::where('refID', $item->refID)->delete();
+        }
+        foreach($sale->payments as $payment)
+        {
+            transactions::where('refID', $payment->refID)->delete();
+            $payment->delete();
+        }
+        $sale->delete();
+        return redirect()->route('saleHistory')->with("error", "Sale Deleted");
+    }
+
 }
