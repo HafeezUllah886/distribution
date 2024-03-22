@@ -6,6 +6,7 @@ use App\Http\Controllers\confirmPasswordController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\DepositWithdrawController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\loadSheetController;
 use App\Http\Controllers\OrderbookerController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\profileController;
@@ -90,6 +91,9 @@ Route::middleware('auth')->group(function (){
     Route::get('/sale/payments/view/{id}', [SalePaymentController::class, 'payments'])->name('salePaymentsView');
     Route::get('/sale/payments/delete/{ref}', [SalePaymentController::class, 'delete'])->name('salePaymentDelete');
     Route::post('/sale/payments/store', [SalePaymentController::class, 'store'])->name('salePaymentStore');
+
+    Route::get('loadsheet', [loadSheetController::class, 'index'])->name('loadSheet');
+    Route::get('loadsheet/print', [loadSheetController::class, 'print'])->name('loadSheetPrint');
 
 });
 
