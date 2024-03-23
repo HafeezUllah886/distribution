@@ -23,7 +23,7 @@
                         <option {{$filter == "Business" ? "selected" : ""}} value="Business">Business</option>
                         <option {{$filter == "Customer"? "selected" : ""}} value="Customer">Customer</option>
                         <option {{$filter == "Vendor" ? "selected" : ""}} value="Vendor">Vendor</option>
-                        <option {{$filter == "Discount" ? "selected" : ""}} value="Discount">Discount</option>
+                        <option {{$filter == "Others" ? "selected" : ""}} value="Others">Others</option>
                     </select>
                 </li>
                 <li class="nav-item more-dropdown ">
@@ -98,7 +98,7 @@
                             <option value="Business">Business</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6 mt-2">
+                    <div class="form-group col-md-6 ">
                         <label for="name">Name <span class="text-danger">*</span></label>
                         <input type="text" name="name" required id="name" class="form-control">
                     </div>
@@ -126,8 +126,8 @@
                         <label for="strn">STRN No. </label>
                         <input type="text" name="strn" id="strn" class="form-control">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="channel">channel</label>
+                    <div class="form-group col-md-6 mt-2">
+                        <label for="channel">Channel</label>
                         <select name="channel" id="channel" class="form-control">
                             <option value="Retailer">Retailer</option>
                             <option value="Wholesaler">Wholesaler</option>

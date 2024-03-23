@@ -74,6 +74,9 @@ class SalesController extends Controller
     );
         $products = $req->productID;
         $total = 0;
+        $fst = 0;
+        $slb = 0;
+        $deal = 0;
         foreach($products as $key => $product)
         {
             $refID          = getRef();
@@ -146,9 +149,15 @@ class SalesController extends Controller
                     'refID'         => $refID,
                 ]
             );
-
+            $fst += $fst_val;
+            $slb += $slb_val;
+            $deal += $deal_val;
             createStock($productID, $req->date, 0, $qty, "Sold in Bill # $sale->id", $refID);
         }
+        
+        addTransaction(6, $req->date, $fst, 0, $ref, "FST of Sale # $sale->id");
+        addTransaction(7, $req->date, $slb, 0, $ref, "Slab of Sale # $sale->id");
+        addTransaction(8, $req->date, $deal, 0, $ref, "Deal of Sale # $sale->id");
         addTransaction($req->customerID, $req->date, $total, 0, $ref, "Pending of Sale # $sale->id");
 
         if($req->payment == 1)
@@ -203,10 +212,11 @@ class SalesController extends Controller
         }
         foreach($old_sale->payments as $payment)
         {
+           
             transactions::where('refID', $payment->refID)->delete();
             $payment->delete();
         }
-
+        transactions::where('refID', $old_sale->refID)->delete();
         $old_sale->update(
             [
                 'date'              => $req->date,
@@ -222,6 +232,9 @@ class SalesController extends Controller
         $total = 0;
         $products = $req->productID;
         $total = 0;
+        $fst = 0;
+        $slb = 0;
+        $deal = 0;
         foreach($products as $key => $product)
         {
             $refID          = getRef();
@@ -294,10 +307,16 @@ class SalesController extends Controller
                     'refID'         => $refID,
                 ]
             );
+            $fst += $fst_val;
+            $slb += $slb_val;
+            $deal += $deal_val;
 
             createStock($productID, $req->date, 0, $qty, "Sold in Bill # $old_sale->id,", $refID);
         }
-        addTransaction($req->customerID, $req->date, $total, 0, $old_sale->refID, "Pending of Sale # $old_sale->id,");
+        addTransaction(6, $req->date, $fst, 0, $old_sale->refID, "FST of Sale # $old_sale->id");
+        addTransaction(7, $req->date, $slb, 0, $old_sale->refID, "Slab of Sale # $old_sale->id");
+        addTransaction(8, $req->date, $deal, 0, $old_sale->refID, "Deal of Sale # $old_sale->id");
+        addTransaction($req->customerID, $req->date, $total, 0, $old_sale->refID, "Pending of Sale # $old_sale->id");
 
         if($req->payment == 1)
         {
@@ -331,6 +350,7 @@ class SalesController extends Controller
             transactions::where('refID', $payment->refID)->delete();
             $payment->delete();
         }
+        transactions::where('refID', $sale->refID)->delete();
         $sale->delete();
         return redirect()->route('saleHistory')->with("error", "Sale Deleted");
     }

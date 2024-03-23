@@ -50,6 +50,7 @@
                                                 <th>Dist</th>
                                                 <th>W/S</th>
                                                 <th>Sch</th>
+                                                <th>Bonus</th>
                                                 <th>Gross</th>
                                                 <th>GST</th>
                                                 <th>MRP</th>
@@ -67,6 +68,7 @@
                                                     <td>{{number_format($product->dist_val,0)}}({{$product->dist_per}}%)</td>
                                                     <td>{{number_format($product->ws_val,0)}}({{$product->ws_per}}%)</td>
                                                     <td>{{number_format($product->sch_val,0)}}({{$product->sch_per}}%)</td>
+                                                    <td>{{number_format($product->bonus, 0)}}</td>
                                                     <td>{{number_format($product->gross, 0)}}</td>
                                                     <td>{{number_format($product->gst_val,0)}}({{$product->gst_per}}%)</td>
                                                     <td>{{number_format($product->mrp_val,0)}}({{$product->mrp_per}})</td>
@@ -80,6 +82,7 @@
                                                 <th>{{number_format($purchase->details->sum('dist_val'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('ws_val'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('sch_val'),0)}}</th>
+                                                <th></th>
                                                 <th>{{number_format($purchase->details->sum('gross'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('gst_val'),0)}}</th>
                                                 <th>{{number_format($purchase->details->sum('mrp_val'),0)}}</th>

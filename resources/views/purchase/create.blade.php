@@ -58,6 +58,7 @@
                             <th class="text-center">Dist</th>
                             <th class="text-center">W/S</th>
                             <th class="text-center">Sch</th>
+                            <th class="text-center">Bonus</th>
                             <th class="text-center">Gross</th>
                             <th class="text-center">GST</th>
                             <th class="text-center">MRP</th>
@@ -74,6 +75,7 @@
                                 <th id="totalDist" class="text-center"></th>
                                 <th id="totalWS" class="text-center"></th>
                                 <th id="totalSch" class="text-center"></th>
+                                <th class="text-center"></th>
                                 <th id="totalGross" class="text-center"></th>
                                 <th id="totalGst" class="text-center"></th>
                                 <th id="totalMrp" class="text-center"></th>
@@ -187,6 +189,7 @@
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="sch_per_'+productID+'" value="3" name="sch_per[]">';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="sch_val_'+productID+'" required value="0" name="sch_val[]">';
                             proHTML += '</td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" value="0" oninput="updateQty('+productID+')" required name="bonus[]" id="bonus_'+productID+'"></td>';
                             proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="0" readonly required name="gross[]" id="gross_'+productID+'"></td>';
                             proHTML += '<td>';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="gst_per_'+productID+'" value="'+gst+'" name="gst_per[]">';
@@ -229,9 +232,11 @@
                 }
         });
         var existingQty = $("#qty_"+id).val();
+        var bonus = $("#bonus_"+id).val();
+        var nQty = existingQty - bonus;
         var price = $("#price_"+id).val();
 
-        var g_price = existingQty * price;
+        var g_price = nQty * price;
 
         var dist = $("#dist_per_"+id).val();
         var dist_val = (g_price / 100) * dist;

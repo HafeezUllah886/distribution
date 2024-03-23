@@ -65,6 +65,7 @@ class PurchaseController extends Controller
             $sch_per        = $req->sch_per[$key];
             $sch_val        = $req->sch_val[$key];
 
+            $bonus          = $req->bonus[$key];
             $gross          = $req->gross[$key];
 
             $gst_per        = $req->gst_per[$key];
@@ -94,6 +95,7 @@ class PurchaseController extends Controller
                     'sch_per'       => $sch_per,
                     'sch_val'       => $sch_val,
 
+                    'bonus'         => $bonus,
                     'gross'         => $gross,
 
                     'gst_per'       => $gst_per,
@@ -114,7 +116,7 @@ class PurchaseController extends Controller
 
             createStock($productID, $req->date, $qty, 0, "Purchased in $purchase->id", $refID);
         }
-
+        addTransaction(9, $req->date, $req->shippingCost, 0, $ref, "Delivery Charges of Purchase ID $purchase->id");
         addTransaction($req->vendorID, $req->date, $total, $total, $ref, "Payment of Purchase ID $purchase->id");
         addTransaction($req->accountID, $req->date, 0, $total + $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
 
@@ -193,6 +195,7 @@ class PurchaseController extends Controller
             $sch_per        = $req->sch_per[$key];
             $sch_val        = $req->sch_val[$key];
 
+            $bonus          = $req->bonus[$key];
             $gross          = $req->gross[$key];
 
             $gst_per        = $req->gst_per[$key];
@@ -222,6 +225,7 @@ class PurchaseController extends Controller
                     'sch_per'       => $sch_per,
                     'sch_val'       => $sch_val,
 
+                    'bonus'         => $bonus,
                     'gross'         => $gross,
 
                     'gst_per'       => $gst_per,
@@ -242,7 +246,7 @@ class PurchaseController extends Controller
 
             createStock($productID, $req->date, $qty, 0, "Purchased in $purchase->id", $refID);
         }
-
+        addTransaction(9, $req->date, $req->shippingCost, 0, $ref, "Delivery Charges of Purchase ID $purchase->id");
         addTransaction($req->vendorID, $req->date, $total, $total, $ref, "Payment of Purchase ID $purchase->id");
         addTransaction($req->accountID, $req->date, 0, $total + $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
 

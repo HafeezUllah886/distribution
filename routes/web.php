@@ -10,6 +10,7 @@ use App\Http\Controllers\loadSheetController;
 use App\Http\Controllers\OrderbookerController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\profitController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalePaymentController;
 use App\Http\Controllers\SalesController;
@@ -94,6 +95,9 @@ Route::middleware('auth')->group(function (){
 
     Route::get('loadsheet', [loadSheetController::class, 'index'])->name('loadSheet');
     Route::get('loadsheet/print', [loadSheetController::class, 'print'])->name('loadSheetPrint');
+
+    Route::get('report/profit', [profitController::class, 'index'])->name('profit');
+    Route::get('report/profit/view', [profitController::class, 'show'])->name('profitView');
 
 });
 

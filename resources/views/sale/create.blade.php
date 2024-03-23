@@ -106,8 +106,8 @@
                         <div class="form-group">
                             <label for="payment">Payment Status</label>
                             <select name="payment"  id="payment" class="form-control">
-                                    <option value="1">Received</option>
-                                    <option value="0">Pending</option>
+                                <option value="0">Pending</option>    
+                                <option value="1">Received</option>
                             </select>
                         </div>
                     </div>

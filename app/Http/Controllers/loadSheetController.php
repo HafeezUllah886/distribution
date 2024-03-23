@@ -24,7 +24,7 @@ class loadSheetController extends Controller
         ->get();
 
         if ($sales->isEmpty()) {
-            return null;
+            return back()->with('error', "No Data Found");
         }
         
         $salesData = [

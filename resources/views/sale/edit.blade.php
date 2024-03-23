@@ -89,19 +89,19 @@
                                 <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1"  value="{{$product->qty}}" required oninput="updateQty({{$productID}})" name="qty[]" id="qty_{{$productID}}"></td>
                                 <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="{{$product->price}}" required oninput="updateQty({{$productID}})" name="price[]" id="price_{{$productID}}"></td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="rt_per_{{$productID}}" value="8" name="rt_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="rt_per_{{$productID}}" value="{{$product->rt_per}}" name="rt_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="rt_val_{{$productID}}" value="{{$product->rt_val}}" required  name="rt_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="ws_per_{{$productID}}" value="2" name="ws_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="ws_per_{{$productID}}" value="{{$product->ws_per}}" name="ws_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="ws_val_{{$productID}}" required value="{{$product->ws_val}}" name="ws_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="slb_per_{{$productID}}" value="3" name="slb_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="slb_per_{{$productID}}" value="{{$product->slb_per}}" name="slb_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="slb_val_{{$productID}}" required value="{{$product->slb_val}}" name="slb_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="deal_per_{{$productID}}" value="3" name="deal_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="deal_per_{{$productID}}" value="{{$product->deal_per}}" name="deal_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="deal_val_{{$productID}}" required value="{{$product->deal_val}}" name="deal_val[]">
                                 </td>
                                 <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" value="{{$product->bonus}}" oninput="updateQty({{$productID}})" required name="bonus[]" id="bonus_{{$productID}}"></td>
@@ -115,7 +115,7 @@
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="mrp_val_{{$productID}}" required value="{{$product->mrp_val}}" name="mrp_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="fst_per_{{$productID}}" value="0" name="fst_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="fst_per_{{$productID}}" value="{{$product->fst_per}}" name="fst_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="fst_val_{{$productID}}" required value="{{$product->fst_val}}" name="fst_val[]">
                                 </td>
                                 <td><input class="form-control form-control-sm text-center input-p-2" readonly type="number" required value="{{$product->amount}}" id="amount_{{$productID}}" name="amount[]"></td>
@@ -157,9 +157,9 @@
                     <div class="col-2">
                         <div class="form-group">
                             <label for="payment">Payment Status</label>
-                            <select name="payment"  id="payment" class="form-control">
-                                    <option value="1">Received</option>
+                            <select name="payment" id="payment" class="form-control">
                                     <option value="0">Pending</option>
+                                    <option value="1">Received</option>
                             </select>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                             <select name="accountID" required id="account" class="form-control">
                                 <option value="">Select Receiving Account</option>
                                 @foreach ($accounts as $account)
-                                    <option value="{{$account->id}}" {{$account->id = $sale->payments[0]->accountID ? 'selected' : ''}}>{{$account->name}}</option>
+                                    <option value="{{$account->id}}" {{$account->id == ($sale->payments[0]->accountID ?? 0) ? 'selected' : ''}}>{{$account->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -180,7 +180,7 @@
                             <select name="salesman" required id="salesman" class="form-control">
                                 <option value="">Select Sales Man</option>
                                 @foreach ($salemans as $man)
-                                    <option value="{{$man->id}}" {{$man->id = $sale->salesmenID ? 'selected' : ''}}>{{$man->name}}</option>
+                                    <option value="{{$man->id}}" {{$man->id == $sale->salesmenID ? 'selected' : ''}}>{{$man->name}}</option>
                                 @endforeach
                             </select>
                         </div>

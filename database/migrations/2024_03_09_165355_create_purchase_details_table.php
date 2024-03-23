@@ -23,6 +23,7 @@ return new class extends Migration
             $table->float('ws_val', 14, 2);
             $table->float('sch_per', 14, 2);
             $table->float('sch_val', 14, 2);
+            $table->integer('bonus');
             $table->float('gross', 14, 2);
             $table->float('gst_per', 14, 2);
             $table->float('gst_val', 14, 2);

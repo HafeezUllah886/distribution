@@ -258,7 +258,7 @@
                     </li>
 
                     <li class="menu">
-                        <a href="{{route('saleHistory')}}" class="dropdown-toggle">
+                        <a href="{{route('saleHistory')}}" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <span>Sale</span>
                             </div>
@@ -314,7 +314,7 @@
 
                     </li>
                     <li class="menu">
-                        <a href="{{route('stockIndex')}}" class="dropdown-toggle">
+                        <a href="{{route('stockIndex')}}" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <span>Stock</span>
                             </div>
@@ -334,7 +334,7 @@
                         </a>
                     </li> --}}
                     <li class="menu">
-                        <a href="{{route('products')}}" class="dropdown-toggle">
+                        <a href="{{route('products')}}" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <span>Products</span>
                             </div>
@@ -344,7 +344,7 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="{{route('salesman')}}" class="dropdown-toggle">
+                        <a href="{{route('salesman')}}" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <span>Sales Man</span>
                             </div>
@@ -354,7 +354,7 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="{{route('orderbooker')}}" class="dropdown-toggle">
+                        <a href="{{route('orderbooker')}}" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <span>Order Bookers</span>
                             </div>
@@ -376,6 +376,9 @@
                         <ul class="dropdown-menu submenu list-unstyled" id="reports" data-bs-parent="#accordionExample">
                             <li class="active">
                                 <a href="{{route('loadSheet')}}"> Load Sheet</a>
+                            </li>
+                            <li class="active">
+                                <a href="{{route('profit')}}"> Profit / Loss</a>
                             </li>
                         </ul>
 

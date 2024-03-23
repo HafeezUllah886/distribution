@@ -68,6 +68,7 @@
                             <th class="text-center">Dist</th>
                             <th class="text-center">W/S</th>
                             <th class="text-center">Sch</th>
+                            <th class="text-center">Bonus</th>
                             <th class="text-center">Gross</th>
                             <th class="text-center">GST</th>
                             <th class="text-center">MRP</th>
@@ -85,17 +86,18 @@
                                 <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1"  value="{{$product->qty}}" required oninput="updateQty({{$productID}})" name="qty[]" id="qty_{{$productID}}"></td>
                                 <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="{{$product->price}}" required oninput="updateQty({{$productID}})" name="price[]" id="price_{{$productID}}"></td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="dist_per_{{$productID}}" value="8" name="dist_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="dist_per_{{$productID}}" value="{{$product->dist_per}}" name="dist_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="dist_val_{{$productID}}" value="{{$product->dist_val}}" required  name="dist_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="ws_per_{{$productID}}" value="2" name="ws_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="ws_per_{{$productID}}" value="{{$product->ws_per}}" name="ws_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="ws_val_{{$productID}}" required value="{{$product->ws_val}}" name="ws_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="sch_per_{{$productID}}" value="3" name="sch_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="sch_per_{{$productID}}" value="{{$product->sch_per}}" name="sch_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="sch_val_{{$productID}}" required value="{{$product->sch_val}}" name="sch_val[]">
                                 </td>
+                                <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="0" value="{{$product->bonus}}" oninput="updateQty({{$productID}})" required name="bonus[]" id="bonus_{{$productID}}"></td>
                                 <td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="{{$product->gross}}" readonly required name="gross[]" id="gross_{{$productID}}"></td>
                                 <td>
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="gst_per_{{$productID}}" value="{{$product->gst_per}}" name="gst_per[]">
@@ -106,7 +108,7 @@
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="mrp_val_{{$productID}}" required value="{{$product->mrp_val}}" name="mrp_val[]">
                                 </td>
                                 <td>
-                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="fst_per_{{$productID}}" value="0" name="fst_per[]">
+                                    <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty({{$productID}})" id="fst_per_{{$productID}}" value="{{$product->fst_per}}" name="fst_per[]">
                                     <input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="fst_val_{{$productID}}" required value="{{$product->fst_val}}" name="fst_val[]">
                                 </td>
                                 <td><input class="form-control form-control-sm text-center input-p-2" readonly type="number" required value="{{$product->amount}}" id="amount_{{$productID}}" name="amount[]"></td>
@@ -121,6 +123,7 @@
                                 <th id="totalDist" class="text-center"></th>
                                 <th id="totalWS" class="text-center"></th>
                                 <th id="totalSch" class="text-center"></th>
+                                <th class="text-center"></th>
                                 <th id="totalGross" class="text-center"></th>
                                 <th id="totalGst" class="text-center"></th>
                                 <th id="totalMrp" class="text-center"></th>
@@ -156,7 +159,7 @@
                             <select name="vendorID" required id="vendor" class="form-control">
                                 <option value="">Select Vendor</option>
                                 @foreach ($vendors as $vendor)
-                                    <option value="{{$vendor->id}}" {{$vendor->id = $purchase->vendorID ? 'selected' : ''}}>{{$vendor->name}}</option>
+                                    <option value="{{$vendor->id}}" {{$vendor->id == $purchase->vendorID ? 'selected' : ''}}>{{$vendor->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -167,7 +170,7 @@
                             <select name="accountID" required id="account" class="form-control">
                                 <option value="">Select Payment Account</option>
                                 @foreach ($accounts as $account)
-                                    <option value="{{$account->id}}" {{$account->id = $purchase->accountID ? 'selected' : ''}}>{{$account->name}}</option>
+                                    <option value="{{$account->id}}" {{$account->id == $purchase->accountID ? 'selected' : ''}}>{{$account->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -236,6 +239,7 @@
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="sch_per_'+productID+'" value="3" name="sch_per[]">';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" readonly step="any" id="sch_val_'+productID+'" required value="0" name="sch_val[]">';
                             proHTML += '</td>';
+                            proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="0" value="0" required oninput="updateQty('+productID+')" name="bonus[]" id="bonus_'+productID+'"></td>';
                             proHTML += '<td><input class="form-control form-control-sm text-center input-p-2" type="number" min="1" step="any" value="0" readonly required name="gross[]" id="gross_'+productID+'"></td>';
                             proHTML += '<td>';
                                 proHTML += '<input class="form-control form-control-sm text-center input-p-2" type="number" min="0" step="any" required oninput="updateQty('+productID+')" id="gst_per_'+productID+'" value="'+gst+'" name="gst_per[]">';
@@ -278,9 +282,11 @@
                 }
         });
         var existingQty = $("#qty_"+id).val();
+        var bonus = $("#bonus_"+id).val();
+        var nQty = existingQty - bonus;
         var price = $("#price_"+id).val();
 
-        var g_price = existingQty * price;
+        var g_price = nQty * price;
 
         var dist = $("#dist_per_"+id).val();
         var dist_val = (g_price / 100) * dist;

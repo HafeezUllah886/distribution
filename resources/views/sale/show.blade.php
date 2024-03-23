@@ -56,14 +56,14 @@
                                                 <th>Qty</th>
                                                 <th>Price</th>
                                                 <th>RT</th>
-                                                <th>W/S</th>
-                                                <th>SLB</th>
-                                                <th>Deal</th>
+                                                <th>W/S{{$sale->details[0]->ws_per > 0 ? "-".$sale->details[0]->ws_per."%" : ""}}</th>
+                                                <th>SLB{{$sale->details[0]->slb_per > 0 ? "-".$sale->details[0]->slb_per."%" : ""}}</th>
+                                                <th>Deal{{$sale->details[0]->deal_per > 0 ? "-".$sale->details[0]->deal_per."%" : ""}}</th>
                                                 <th>Bonus</th>
                                                 <th>Gross</th>
-                                                <th>GST</th>
+                                                <th>GST-18%</th>
                                                 <th>MRP</th>
-                                                <th>FST</th>
+                                                <th>FST-4%</th>
                                                 <th class="text-end">Sub-Total</th>
                                             </thead>
                                             <tbody>
@@ -75,14 +75,14 @@
                                                     <td>{{$product->qty}}</td>
                                                     <td>{{number_format($product->price, 2)}}</td>
                                                     <td>{{number_format($product->rt_val,0)}}({{$product->rt_per}}%)</td>
-                                                    <td>{{number_format($product->ws_val,0)}}({{$product->ws_per}}%)</td>
-                                                    <td>{{number_format($product->slb_val,0)}}({{$product->slb_per}}%)</td>
-                                                    <td>{{number_format($product->deal_val,0)}}({{$product->deal_per}}%)</td>
+                                                    <td>{{number_format($product->ws_val,0)}}</td>
+                                                    <td>{{number_format($product->slb_val,0)}}</td>
+                                                    <td>{{number_format($product->deal_val,0)}}</td>
                                                     <td>{{number_format($product->bonus,0)}}</td>
                                                     <td>{{number_format($product->gross, 0)}}</td>
-                                                    <td>{{number_format($product->gst_val,0)}}({{$product->gst_per}}%)</td>
+                                                    <td>{{number_format($product->gst_val,0)}}</td>
                                                     <td>{{number_format($product->mrp_val,0)}}({{$product->mrp_per}})</td>
-                                                    <td>{{number_format($product->fst_val,0)}}({{$product->fst_per}}%)</td>
+                                                    <td>{{number_format($product->fst_val,0)}}</td>
                                                     <td class="text-end">{{number_format($product->amount,0)}}</td>
                                                 </tr>
                                                 @endforeach
@@ -142,7 +142,7 @@
                                         <div class="inv--note">
                                             <div class="row mt-4">
                                                 <div class="col-sm-12 col-12 order-sm-0 order-1">
-                                                    <p>Purchase Notes: {{ $sale->notes }}</p>
+                                                    <p>Sale Notes: {{ $sale->notes }}</p>
                                                 </div>
                                             </div>
                                         </div>

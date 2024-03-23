@@ -33,24 +33,6 @@ class accountsSeeder extends Seeder
         );
         account::create(
             [
-                'name' => 'Wholesale',
-                'category' => 'Discount',
-            ]
-        );
-        account::create(
-            [
-                'name' => 'Slab',
-                'category' => 'Discount',
-            ]
-        );
-        account::create(
-            [
-                'name' => 'Deal',
-                'category' => 'Discount',
-            ]
-        );
-        account::create(
-            [
                 'name' => 'Vendor',
                 'category' => 'Vendor',
                 'b_name' => 'Vendor Business Name',
@@ -69,6 +51,30 @@ class accountsSeeder extends Seeder
                 'ntn' => '12345',
                 'strn' => '12345',
                 'channel' => 'Retailer',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'FST',
+                'category' => 'Others',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Slab',
+                'category' => 'Others',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Deal',
+                'category' => 'Others',
+            ]
+        );
+        account::create(
+            [
+                'name' => 'Delivery Charges',
+                'category' => 'Others',
             ]
         );
     }
