@@ -363,15 +363,22 @@
                             </div>
                         </a>
                     </li>
+                   
                     <li class="menu">
-                        <a href="{{route('loadSheet')}}" class="dropdown-toggle">
+                        <a href="#reports" data-bs-toggle="dropdown" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
-                                <span>Load Sheet</span>
+                                <span>Reports</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             </div>
                         </a>
+                        <ul class="dropdown-menu submenu list-unstyled" id="reports" data-bs-parent="#accordionExample">
+                            <li class="active">
+                                <a href="{{route('loadSheet')}}"> Load Sheet</a>
+                            </li>
+                        </ul>
+
                     </li>
 
                 </ul>
