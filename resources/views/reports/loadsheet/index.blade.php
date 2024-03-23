@@ -36,10 +36,10 @@
                 </div>
                 <div class="col-12">
                     <div class="mb-4">
-                        <label class="form-label">Sales Man</label>
-                        <select name="salesman" id="salesman" class="form-control">
-                            @foreach ($salesmans as $salesman)
-                                <option value="{{ $salesman->id }}">{{ $salesman->name }}</option>
+                        <label class="form-label">Order Booker</label>
+                        <select name="orderbooker" id="orderbooker" class="form-control">
+                            @foreach ($orderbookers as $orderbooker)
+                                <option value="{{ $orderbooker->id }}">{{ $orderbooker->name }}</option>
                             @endforeach
                         </select>
                     </div>

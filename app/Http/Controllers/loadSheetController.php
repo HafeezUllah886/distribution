@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\orderbooker;
 use App\Models\sales;
 use App\Models\salesman;
 use Illuminate\Http\Request;
@@ -10,15 +11,15 @@ class loadSheetController extends Controller
 {
     public function index()
     {
-        $salesmans = salesman::all();
+        $orderbookers = orderbooker::all();
 
-        return view('reports.loadsheet.index', compact('salesmans'));
+        return view('reports.loadsheet.index', compact('orderbookers'));
     }
 
     public function print(request $req)
     {
         $sales = sales::where('date', $req->date)
-        ->where('salesmenID', $req->salesman)
+        ->where('orderbookerID', $req->orderbooker)
         ->with('details') // Eager load sale details
         ->get();
 
@@ -59,7 +60,7 @@ class loadSheetController extends Controller
             }
     
             $salesData['total_sale_amount'] += $sale->payments->sum('amount');
-            $salesData['salesman'] = $sale->salesmen->name;
+            $salesData['orderbooker'] = $sale->orderbooker->name;
             $salesData['date'] = $sale->date;
         }
     

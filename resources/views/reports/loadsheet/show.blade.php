@@ -35,7 +35,7 @@
                                                     <h6 class=" inv-title"></h6>
                                                 </div>
                                                 <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                    <p class="inv-customer-name">Sales Man: {{$salesData['salesman']}}</p>
+                                                    <p class="inv-customer-name">Order Booker: {{$salesData['orderbooker']}}</p>
                                                     
                                                 </div>
                                               
