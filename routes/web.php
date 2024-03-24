@@ -16,10 +16,13 @@ use App\Http\Controllers\SalePaymentController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SalesmanController;
 use App\Http\Controllers\StocksController;
+use App\Http\Controllers\TodoController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UnitsController;
+use App\Http\Controllers\VendorExpensesController;
 use App\Models\purchase;
 use App\Models\transfer;
+use App\Models\vendorExpenses;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +61,9 @@ Route::middleware('auth')->group(function (){
 
     Route::get('/expense', [ExpenseController::class, 'index'])->name('expense');
     Route::post('/expense/store', [ExpenseController::class, 'store'])->name('expenseStore');
+
+    Route::get('/vendor/expense', [VendorExpensesController::class, 'index'])->name('vendorExpense');
+    Route::post('/vendor/expense/store', [VendorExpensesController::class, 'store'])->name('vendorExpenseStore');
 
     Route::get('/confirm-password', [confirmPasswordController::class, 'showConfirmPasswordForm'])->name('confirm-password');
     Route::post('/confirm-password', [confirmPasswordController::class, 'confirmPassword']);
@@ -99,12 +105,23 @@ Route::middleware('auth')->group(function (){
     Route::get('report/profit', [profitController::class, 'index'])->name('profit');
     Route::get('report/profit/view', [profitController::class, 'show'])->name('profitView');
 
+    Route::get('/todo', [TodoController::class, 'index']);
+    Route::get('/todo/store', [TodoController::class, 'store']);
+    Route::get('/todo/update', [TodoController::class, 'update']);
+    Route::get('/todo/status/{id}/{status}', [TodoController::class, 'status']);
+    Route::get('/todo/level/{id}/{level}', [TodoController::class, 'level']);
+    Route::get('/todo/delete/{id}', [TodoController::class, 'delete']);
+    Route::get('/todo/forceDelete/{id}', [TodoController::class, 'forceDelete']);
+    Route::get('/todo/restore/{id}', [TodoController::class, 'restore']);
+
+
 });
 
 Route::middleware(['confirm.password'])->group(function () {
     Route::get('/transfer/delete/{ref}',[TransferController::class, 'delete'])->name('transferDelete');
     Route::get('/depositwithdraw/delete/{ref}',[DepositWithdrawController::class, 'delete'])->name('depositWithdrawDelete');
     Route::get('/expense/delete/{ref}',[ExpenseController::class, 'delete'])->name('expenseDelete');
+    Route::get('/vendor/expense/delete/{ref}',[VendorExpensesController::class, 'delete'])->name('vendorExpenseDelete');
     Route::get('/purchase/delete/{id}',[PurchaseController::class, 'delete'])->name('purchaseDelete');
     Route::get('/sale/delete/{id}',[SalesController::class, 'delete'])->name('saleDelete');
 });

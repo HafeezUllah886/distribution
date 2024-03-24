@@ -47,7 +47,7 @@
                     </a>
                 </li> --}}
                 <li class="nav-item theme-text">
-                    <a href="index-2.html" class="nav-link"> POS </a>
+                    <a href="index-2.html" class="nav-link"> KK DISTRIBUTIONS </a>
                 </li>
             </ul>
 
@@ -235,7 +235,7 @@
                             </a>
                         </div>
                         <div class="nav-item theme-text">
-                            <a href="index-2.html" class="nav-link"> POS </a>
+                            <a href="{{route('dashboard')}}" class="nav-link"> KK DISTRIBUTIONS </a>
                         </div>
                     </div>
                     <div class="nav-item sidebar-toggle">
@@ -247,7 +247,7 @@
                 <div class="shadow-bottom"></div>
                 <ul class="list-unstyled menu-categories" id="accordionExample">
                     <li class="menu">
-                        <a href="#dashboard" data-bs-toggle="dropdown" aria-expanded="true" class="dropdown-toggle">
+                        <a href="{{route('dashboard')}}" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <span>Dashboard</span>
                             </div>
@@ -308,7 +308,10 @@
                                 <a href="{{ route('depositWithdraw') }}"> Deposit / Withdraw </a>
                             </li>
                             <li>
-                                <a href="{{ route('expense') }}"> Expense </a>
+                                <a href="{{ route('expense') }}"> Expenses </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('vendorExpense') }}"> Vendor Expenses </a>
                             </li>
                         </ul>
 
@@ -357,6 +360,16 @@
                         <a href="{{route('orderbooker')}}" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <span>Order Bookers</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="{{url('/todo')}}" aria-expanded="true" class="dropdown-toggle">
+                            <div class="">
+                                <span>TODOs</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>

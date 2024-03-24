@@ -13,18 +13,11 @@
             <div class="d-flex breadcrumb-content">
                 <div class="page-header">
 
-                    <div class="page-title"><h3>Sales Dashboard</h3></div>
-
-                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Sales</li>
-                        </ol>
-                    </nav>
+                    <div class="page-title"><h3>Dashboard</h3></div>
 
                 </div>
             </div>
-            <ul class="navbar-nav flex-row ms-auto breadcrumb-action-dropdown">
+           {{--  <ul class="navbar-nav flex-row ms-auto breadcrumb-action-dropdown">
                 <li class="nav-item more-dropdown">
                     <div class="dropdown  custom-dropdown-icon">
                         <a class="dropdown-toggle btn" href="#" role="button" id="customDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,10 +51,127 @@
 
                     </div>
                 </li>
-            </ul>
+            </ul> --}}
         </header>
     </div>
 </div>
+<div class="row layout-top-spacing">
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Reminders</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Due</span> {{reminder()}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Customer Dues</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Rs.</span> {{customer_dues()}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Total Stock</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Nos.</span>  {{stock('totalStock')}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Stock Value</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Rs.</span> {{stock('totalValue')}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Expense (This Month)</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Rs.</span> {{expenseThisMonth()}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Profit / Loss</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Rs.</span> {{profit()}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!--  END BREADCRUMBS  -->
+@endsection
+@section('more-css')
+     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+     <link href="{{ asset('src/plugins/src/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
 
+     <link href="{{ asset('src/assets/css/light/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('src/plugins/css/light/apex/custom-apexcharts.css') }}" rel="stylesheet" type="text/css">
+
+     <link href="{{ asset('src/assets/css/dark/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('src/plugins/css/dark/apex/custom-apexcharts.css') }}" rel="stylesheet" type="text/css">
+
+     <link href="{{ asset('src/assets/css/light/dashboard/dash_2.css') }}" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('src/assets/css/dark/dashboard/dash_2.css') }}" rel="stylesheet" type="text/css" />
+
+     <link href="{{ asset('src/assets/css/light/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('src/assets/css/dark/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
+   
+
+
+     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 @endsection
