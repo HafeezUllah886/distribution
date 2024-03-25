@@ -232,3 +232,48 @@ function profit()
         return $todos;
     }
 
+    function cash_balance()
+    {
+        $accounts = account::where('category', 'Business')->where('type', 'Cash')->get();
+        $balance = 0;
+        foreach($accounts as $account)
+        {
+            $trans = transactions::where('accountID', $account->id)->get();
+            $cr = $trans->sum('cr');
+            $db = $trans->sum('db');
+            $balance += $cr - $db;
+        }
+
+        return number_format($balance);
+    }
+
+    function bank_balance()
+    {
+        $accounts = account::where('category', 'Business')->where('type', 'Bank')->get();
+        $balance = 0;
+        foreach($accounts as $account)
+        {
+            $trans = transactions::where('accountID', $account->id)->get();
+            $cr = $trans->sum('cr');
+            $db = $trans->sum('db');
+            $balance += $cr - $db;
+        }
+
+        return number_format($balance);
+    }
+
+    function cheque_balance()
+    {
+        $accounts = account::where('category', 'Business')->where('type', 'Cheque')->get();
+        $balance = 0;
+        foreach($accounts as $account)
+        {
+            $trans = transactions::where('accountID', $account->id)->get();
+            $cr = $trans->sum('cr');
+            $db = $trans->sum('db');
+            $balance += $cr - $db;
+        }
+
+        return number_format($balance,0);
+    }
+

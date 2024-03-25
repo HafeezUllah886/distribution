@@ -67,7 +67,7 @@
                             <div class="dropdown-menu" aria-labelledby="action_{{ $key }}" >
                                 <a class="dropdown-item" href="{{ route('accountStatement', [$account->id, firstDayOfMonth(), lastDayOfMonth()]) }}">View Statement</a>
                                 @if ($account->category != "Discount")
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="edit({{ $account->id }}, '{{ $account->name }}', '{{ $account->category }}', '{{ $account->b_name }}', '{{ $account->cnic }}', '{{ $account->contact }}', '{{ $account->address }}' , '{{ $account->ntn }}', '{{ $account->strn }}', '{{ $account->channel }}')">Edit</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="edit({{ $account->id }}, '{{ $account->name }}', '{{ $account->category }}', '{{ $account->b_name }}', '{{ $account->cnic }}', '{{ $account->contact }}', '{{ $account->address }}' , '{{ $account->ntn }}', '{{ $account->strn }}', '{{ $account->channel }}', '{{ $account->type }}')">Edit</a>
                                 @endif
                             </div>
                         </div>
@@ -96,6 +96,14 @@
                             <option value="Customer">Customer</option>
                             <option value="Vendor">Vendor</option>
                             <option value="Business">Business</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="type">Type</label>
+                        <select name="type" disabled id="type" class="form-control">
+                            <option value="Cash">Cash</option>
+                            <option value="Bank">Bank</option>
+                            <option value="Cheque">Cheque</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6 ">
@@ -160,7 +168,15 @@
                     @csrf
                     <input type="hidden" name="id" id="edit_id">
                     <div class="row">
-                        <div class="form-group col-md-6 mt-2">
+                        <div class="form-group col-md-6">
+                            <label for="type">Type</label>
+                            <select name="type" id="edit_type" class="form-control">
+                                <option value="Cash">Cash</option>
+                                <option value="Bank">Bank</option>
+                                <option value="Cheque">Cheque</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="name">Name <span class="text-danger">*</span></label>
                             <input type="text" name="name" required id="edit_name" class="form-control">
                         </div>
@@ -189,7 +205,7 @@
                             <input type="text" name="strn" id="edit_strn" class="form-control">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="channel">channel</label>
+                            <label for="channel">Channel</label>
                             <select name="channel" id="edit_channel" class="form-control">
                                 <option value="Retailer">Retailer</option>
                                 <option value="Wholesaler">Wholesaler</option>
@@ -230,7 +246,7 @@
   <script src="{{ asset('src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
 
   <script>
-    function edit(id, name, category, b_name, cnic, contact, address, ntn, strn, channel)
+    function edit(id, name, category, b_name, cnic, contact, address, ntn, strn, channel, type)
     {
         $("#edit_id").val(id);
         $("#edit_name").val(name);
@@ -241,6 +257,7 @@
         $("#edit_ntn").val(ntn);
         $("#edit_strn").val(strn);
         $("#edit_channel").val(channel);
+        $("#edit_type").val(type);
         $("#editModal").modal("show");
         if(category == "Business")
         {
@@ -251,6 +268,7 @@
             $("#edit_ntn").prop('disabled', 'true');
             $("#edit_strn").prop('disabled', 'true');
             $("#edit_channel").prop('disabled', 'true');
+            $("#edit_type").removeAttr('disabled');
         }
         else if(category == "Vendor")
         {
@@ -261,6 +279,7 @@
             $("#edit_ntn").prop('disabled', 'true');
             $("#edit_strn").prop('disabled', 'true');
             $("#edit_channel").prop('disabled', 'true');
+            $("#edit_type").prop('disabled', 'true');
         }
         else
         {
@@ -271,6 +290,7 @@
             $("#edit_ntn").removeAttr('disabled');
             $("#edit_strn").removeAttr('disabled');
             $("#edit_channel").removeAttr('disabled');
+            $("#edit_type").prop('disabled', 'true');
         }
        
     }
@@ -295,6 +315,7 @@
             $("#ntn").prop('disabled', 'true');
             $("#strn").prop('disabled', 'true');
             $("#channel").prop('disabled', 'true');
+            $("#type").removeAttr('disabled');
         }
         else if(category == "Vendor")
         {
@@ -305,6 +326,7 @@
             $("#ntn").prop('disabled', 'true');
             $("#strn").prop('disabled', 'true');
             $("#channel").prop('disabled', 'true');
+            $("#type").prop('disabled', 'true');
         }
         else
         {
@@ -315,6 +337,7 @@
             $("#ntn").removeAttr('disabled');
             $("#strn").removeAttr('disabled');
             $("#channel").removeAttr('disabled');
+            $("#type").prop('disabled', 'true');
         }
     }
   </script>

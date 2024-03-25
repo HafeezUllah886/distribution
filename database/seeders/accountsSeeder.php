@@ -16,18 +16,21 @@ class accountsSeeder extends Seeder
         account::create(
             [
                 'name' => 'Cash',
+                'type' => 'Cash',
                 'category' => 'Business',
             ]
         );
         account::create(
             [
                 'name' => 'Cheque',
+                'type' => 'Cheque',
                 'category' => 'Business',
             ]
         );
         account::create(
             [
                 'name' => 'Bank',
+                'type' => 'Bank',
                 'category' => 'Business',
             ]
         );

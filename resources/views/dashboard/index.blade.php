@@ -152,6 +152,54 @@
             </div>
         </div>
     </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Cash Balance</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Rs.</span> {{cash_balance()}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Bank Balance</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Rs.</span> {{bank_balance()}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-card-four">
+            <div class="widget-content">
+                <div class="w-header">
+                    <div class="w-info">
+                        <h6 class="value">Cheque Balance</h6>
+                    </div>
+                </div>
+                <div class="w-content mt-2">
+                    <div class="w-info">
+                        <p class="value"> <span>Rs.</span> {{cheque_balance()}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!--  END BREADCRUMBS  -->
 @endsection
