@@ -13,6 +13,7 @@ use App\Http\Controllers\profileController;
 use App\Http\Controllers\profitController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalePaymentController;
+use App\Http\Controllers\SaleReturnController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SalesmanController;
 use App\Http\Controllers\StocksController;
@@ -114,6 +115,11 @@ Route::middleware('auth')->group(function (){
     Route::get('/todo/forceDelete/{id}', [TodoController::class, 'forceDelete']);
     Route::get('/todo/restore/{id}', [TodoController::class, 'restore']);
 
+    Route::get('/sale/returns', [SaleReturnController::class, 'index'])->name('saleReturns');
+    Route::get('/sale/return/create', [SaleReturnController::class, 'create'])->name('saleReturnCreate');
+    Route::get('/sale/return/view/{id}', [SaleReturnController::class, 'show'])->name('saleReturnShow');
+    Route::post('/sale/return/store', [SaleReturnController::class, 'store'])->name('saleReturnStore');
+    Route::get('/sale/return/singleProduct/{id}', [SaleReturnController::class, 'singleProduct'])->name('saleReturnSingleProduct');
 
 });
 
@@ -124,4 +130,5 @@ Route::middleware(['confirm.password'])->group(function () {
     Route::get('/vendor/expense/delete/{ref}',[VendorExpensesController::class, 'delete'])->name('vendorExpenseDelete');
     Route::get('/purchase/delete/{id}',[PurchaseController::class, 'delete'])->name('purchaseDelete');
     Route::get('/sale/delete/{id}',[SalesController::class, 'delete'])->name('saleDelete');
+    Route::get('/sale/return/delete/{id}',[SaleReturnController::class, 'delete'])->name('saleReturnDelete');
 });

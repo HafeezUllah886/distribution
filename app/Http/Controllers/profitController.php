@@ -6,6 +6,7 @@ use App\Models\expense;
 use App\Models\products;
 use App\Models\purchase_details;
 use App\Models\sale_details;
+use App\Models\sale_return_details;
 use Illuminate\Http\Request;
 
 class profitController extends Controller
@@ -81,8 +82,16 @@ class profitController extends Controller
             
             $product->avgSalePrice = $avgSalePrice;
             $product->totalSold = $sumOfQty - $sumOfBonus;
+            ///////////Return Details //////////////
+
+            $return = sale_return_details::where('productID', $product->id)
+            ->whereBetween('date', [$start, $end])
+            ->get();
+            $returnQty = $return->sum('qty');
+            
+            $product->return = $returnQty;
             $product->profitPerProduct = $product->avgSalePrice - $product->avgPurchasePrice;
-            $product->subProfit = $product->profitPerProduct * $product->totalSold; 
+            $product->subProfit = $product->profitPerProduct * ($product->totalSold - $returnQty); 
         }
         $expenses = expense::whereBetween('date', [$start, $end])->sum('amount');
 

@@ -50,6 +50,7 @@
                                                 <th>Avg Sale Price</th>
                                                 <th>Profit Per Product</th>
                                                 <th>Sold</th>
+                                                <th>Returned</th>
                                                 <th class="text-end">Sub Profit</th>
                                             </thead>
                                             <tbody>
@@ -66,7 +67,8 @@
                                                     <td>{{ number_format($product->avgPurchasePrice,2) }}</td>
                                                     <td>{{ number_format($product->avgSalePrice,2) }}</td>
                                                     <td>{{ number_format($product->profitPerProduct,2) }}</td>
-                                                    <td>{{ number_format($product->totalSold,2) }}</td>
+                                                    <td>{{ number_format($product->totalSold,0) }}</td>
+                                                    <td>{{ number_format($product->return,0) }}</td>
                                                     <td class="text-end">{{ number_format($product->subProfit,2) }}</td>
                                                 @endforeach
                                             </tbody>
