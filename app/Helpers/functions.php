@@ -6,6 +6,7 @@ use App\Models\products;
 use App\Models\purchase_details;
 use App\Models\reference;
 use App\Models\sale_details;
+use App\Models\sale_return_details;
 use App\Models\stocks;
 use App\Models\todo;
 use App\Models\transactions;
@@ -213,9 +214,14 @@ function profit()
             
             $product->avgSalePrice = $avgSalePrice;
             $product->totalSold = $sumOfQty - $sumOfBonus;
+            $return = sale_return_details::where('productID', $product->id)
+            ->get();
+            $returnQty = $return->sum('qty');
+            
+            $product->return = $returnQty;
             $product->profitPerProduct = $product->avgSalePrice - $product->avgPurchasePrice;
-            $product->subProfit = $product->profitPerProduct * $product->totalSold; 
-
+            $product->subProfit = $product->profitPerProduct * ($product->totalSold - $returnQty); 
+            
             $netProfit += $product->subProfit;
         }
         $expenses = expense::sum('amount');
