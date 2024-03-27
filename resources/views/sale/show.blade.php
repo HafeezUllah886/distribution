@@ -56,9 +56,15 @@
                                                 <th>Qty</th>
                                                 <th>Price</th>
                                                 <th>RT</th>
+                                                @if ($sale->details[0]->ws_per > 0)
                                                 <th>W/S{{$sale->details[0]->ws_per > 0 ? "-".$sale->details[0]->ws_per."%" : ""}}</th>
-                                                <th>SLB{{$sale->details[0]->slb_per > 0 ? "-".$sale->details[0]->slb_per."%" : ""}}</th>
-                                                <th>Deal{{$sale->details[0]->deal_per > 0 ? "-".$sale->details[0]->deal_per."%" : ""}}</th>
+                                                @endif
+                                                @if ($sale->details[0]->slb_per > 0)
+                                                 <th>SLB{{$sale->details[0]->slb_per > 0 ? "-".$sale->details[0]->slb_per."%" : ""}}</th>
+                                                @endif
+                                                @if ($sale->details[0]->deal_per > 0)
+                                                 <th>Deal{{$sale->details[0]->deal_per > 0 ? "-".$sale->details[0]->deal_per."%" : ""}}</th>
+                                                @endif
                                                 <th>Bonus</th>
                                                 <th>Gross</th>
                                                 <th>GST-18%</th>
@@ -75,9 +81,15 @@
                                                     <td>{{$product->qty}}</td>
                                                     <td>{{number_format($product->price, 2)}}</td>
                                                     <td>{{number_format($product->rt_val,0)}}({{$product->rt_per}}%)</td>
-                                                    <td>{{number_format($product->ws_val,0)}}</td>
-                                                    <td>{{number_format($product->slb_val,0)}}</td>
-                                                    <td>{{number_format($product->deal_val,0)}}</td>
+                                                    @if ($sale->details[0]->ws_per > 0)
+                                                        <td>{{number_format($product->ws_val,0)}}</td>
+                                                    @endif
+                                                    @if ($sale->details[0]->slb_per > 0)
+                                                        <td>{{number_format($product->slb_val,0)}}</td>
+                                                    @endif
+                                                    @if ($sale->details[0]->deal_per > 0)
+                                                        <td>{{number_format($product->deal_val,0)}}</td>
+                                                    @endif
                                                     <td>{{number_format($product->bonus,0)}}</td>
                                                     <td>{{number_format($product->gross, 0)}}</td>
                                                     <td>{{number_format($product->gst_val,0)}}</td>
@@ -90,9 +102,15 @@
                                             <tfoot>
                                                 <th colspan="5" class="text-end">Total</th>
                                                 <th>{{number_format($sale->details->sum('rt_val'),0)}}</th>
+                                                @if ($sale->details[0]->ws_per > 0)
                                                 <th>{{number_format($sale->details->sum('ws_val'),0)}}</th>
+                                                @endif
+                                                @if ($sale->details[0]->ws_per > 0)
                                                 <th>{{number_format($sale->details->sum('slb_val'),0)}}</th>
+                                                @endif
+                                                @if ($sale->details[0]->ws_per > 0)
                                                 <th>{{number_format($sale->details->sum('deal_val'),0)}}</th>
+                                                @endif
                                                 <th></th>
                                                 <th>{{number_format($sale->details->sum('gross'),0)}}</th>
                                                 <th>{{number_format($sale->details->sum('gst_val'),0)}}</th>
@@ -102,7 +120,7 @@
                                             </tfoot>
                                            </table>
                                         </div>
-                                        <div class="inv--total-amounts">          
+                                        <div class="inv--total-amounts">
                                             <div class="row mt-4">
                                                 {{-- <div class="col-sm-5 col-12 order-sm-0 order-1">
                                                 </div> --}}
@@ -138,7 +156,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="inv--note">
                                             <div class="row mt-4">
                                                 <div class="col-sm-12 col-12 order-sm-0 order-1">
