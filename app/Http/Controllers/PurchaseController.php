@@ -23,7 +23,7 @@ class PurchaseController extends Controller
         $products = products::all();
         $accounts = account::where('category', 'Business')->get();
         $vendors = account::where('category', 'Vendor')->get();
-     
+
         return view('purchase.create', compact('products', 'accounts', 'vendors'));
     }
 
@@ -34,7 +34,7 @@ class PurchaseController extends Controller
 
     public function store(Request $req)
     {
-       
+
     $ref = getRef();
 
     $purchase = purchase::create(
@@ -117,7 +117,7 @@ class PurchaseController extends Controller
             createStock($productID, $req->date, $qty, 0, "Purchased in $purchase->id", $refID);
         }
         addTransaction(9, $req->date, $req->shippingCost, 0, $ref, "Delivery Charges of Purchase ID $purchase->id");
-        addTransaction($req->vendorID, $req->date, $total, $total, $ref, "Payment of Purchase ID $purchase->id");
+        addTransaction($req->vendorID, $req->date, 0, $total, $ref, "Payment of Purchase ID $purchase->id");
         addTransaction($req->accountID, $req->date, 0, $total + $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
 
         return redirect()->route('purchaseHistory')->with('success', 'Purchase Created');
@@ -135,7 +135,7 @@ class PurchaseController extends Controller
         foreach($purchase->details as $item)
         {
             stocks::where('refID', $item->refID)->delete();
-            
+
             purchase_details::where('refID', $item->refID)->delete();
         }
         transactions::where('refID', $purchase->refID)->delete();
@@ -159,7 +159,7 @@ class PurchaseController extends Controller
         foreach($old_purchase->details as $item)
         {
             stocks::where('refID', $item->refID)->delete();
-            
+
             purchase_details::where('refID', $item->refID)->delete();
         }
         transactions::where('refID', $old_purchase->refID)->delete();
@@ -247,12 +247,12 @@ class PurchaseController extends Controller
             createStock($productID, $req->date, $qty, 0, "Purchased in $purchase->id", $refID);
         }
         addTransaction(9, $req->date, $req->shippingCost, 0, $ref, "Delivery Charges of Purchase ID $purchase->id");
-        addTransaction($req->vendorID, $req->date, $total, $total, $ref, "Payment of Purchase ID $purchase->id");
+        addTransaction($req->vendorID, $req->date, 0, $total, $ref, "Payment of Purchase ID $purchase->id");
         addTransaction($req->accountID, $req->date, 0, $total + $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
 
         return redirect()->route('purchaseHistory')->with('success', 'Purchase Updated');
 
 
     }
-   
+
 }
