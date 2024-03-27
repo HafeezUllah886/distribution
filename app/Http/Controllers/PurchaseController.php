@@ -118,7 +118,7 @@ class PurchaseController extends Controller
         }
         addTransaction(9, $req->date, $req->shippingCost, 0, $ref, "Delivery Charges of Purchase ID $purchase->id");
         addTransaction($req->vendorID, $req->date, 0, $total, $ref, "Payment of Purchase ID $purchase->id");
-        addTransaction($req->accountID, $req->date, 0, $total + $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
+        addTransaction($req->accountID, $req->date, 0, $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
 
         return redirect()->route('purchaseHistory')->with('success', 'Purchase Created');
     }
@@ -248,7 +248,7 @@ class PurchaseController extends Controller
         }
         addTransaction(9, $req->date, $req->shippingCost, 0, $ref, "Delivery Charges of Purchase ID $purchase->id");
         addTransaction($req->vendorID, $req->date, 0, $total, $ref, "Payment of Purchase ID $purchase->id");
-        addTransaction($req->accountID, $req->date, 0, $total + $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
+        addTransaction($req->accountID, $req->date, 0, $req->shippingCost, $ref, "Payment of Purchase ID $purchase->id");
 
         return redirect()->route('purchaseHistory')->with('success', 'Purchase Updated');
 
