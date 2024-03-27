@@ -54,9 +54,9 @@
                         <td>{{$key+1}}</td>
                         <td>{{$customer->name}}</td>
                         <td>{{$customer->channel}}</td>
-                        <td>{{$customer->purchases}}</td>
-                        <td>{{$customer->returns}}</td>
-                        <td>{{$customer->balance}}</td>
+                        <td>{{number_format($customer->purchases,0)}}</td>
+                        <td>{{number_format($customer->returns,0)}}</td>
+                        <td>{{number_format($customer->balance,0)}}</td>
                        
                     </tr>
                @endforeach

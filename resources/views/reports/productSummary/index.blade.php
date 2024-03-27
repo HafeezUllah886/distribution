@@ -56,13 +56,13 @@
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$product->desc}}</td>
-                        <td>{{$product->purchase_qty}}</td>
-                        <td>{{$product->purchase_amount}}</td>
-                        <td>{{$product->sale_qty}}</td>
-                        <td>{{$product->sale_amount}}</td>
-                        <td>{{$product->return_qty}}</td>
-                        <td>{{$product->return_amount}}</td>
-                        <td>{{$product->stock}}</td>
+                        <td>{{number_format($product->purchase_qty,0)}}</td>
+                        <td>{{number_format($product->purchase_amount,0)}}</td>
+                        <td>{{number_format($product->sale_qty,0)}}</td>
+                        <td>{{number_format($product->sale_amount,0)}}</td>
+                        <td>{{number_format($product->return_qty,0)}}</td>
+                        <td>{{number_format($product->return_amount,0)}}</td>
+                        <td>{{number_format($product->stock,0)}}</td>
                     </tr>
                @endforeach
             </tbody>
