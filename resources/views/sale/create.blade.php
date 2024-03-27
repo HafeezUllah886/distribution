@@ -106,7 +106,7 @@
                         <div class="form-group">
                             <label for="payment">Payment Status</label>
                             <select name="payment"  id="payment" class="form-control">
-                                <option value="0">Pending</option>    
+                                <option value="0">Pending</option>
                                 <option value="1">Received</option>
                             </select>
                         </div>
@@ -157,6 +157,18 @@
                             <input type="text" name="sign" value="{{auth()->user()->sign}}" id="sign" class="form-control">
                         </div>
                     </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="reminder">Reminder Notes</label>
+                            <input type="text" name="reminder" oninput="reminder1()" id="reminder" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="due">Reminder Due</label>
+                            <input type="date" name="dueDate" min="{{ date("Y-m-d") }}" id="dueDate" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -179,10 +191,25 @@
 @endsection
 @section('more-css')
     <link rel="stylesheet" href="{{ asset('src/plugins/src/selectize/selectize.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('src/assets/css/light/forms/switches.css') }}">
+    <link rel="stylesheet" href="{{ asset('src/assets/css/dark/forms/switches.css') }}">
 @endsection
 @section('more-js')
     <script src="{{ asset('src/plugins/src/selectize/selectize.min.js') }}"></script>
     <script>
+        function reminder1()
+        {
+            var reminder = $("#reminder").val();
+            if(reminder == "")
+            {
+                $("#dueDate").removeAttr('required');
+            }
+            else
+            {
+                $("#dueDate").prop('required', 'true');
+            }
+
+        }
         $('.selectize').selectize({
             onChange: function(value) {
                 if(value != "")
@@ -255,7 +282,7 @@
                         $("#list").prepend(proHTML);
                         existingProducts.push(productID);
                         updateQty(productID)
-                        $('input[id^="qty_"]:first').focus().select();   
+                        $('input[id^="qty_"]:first').focus().select();
                     }
                     else
                     {
@@ -308,7 +335,7 @@
         var fst_val = (gross / 100) * fst;
 
         var amount = gross + gst_val + fst_val + t_mrp;
-       
+
         $("#rt_val_"+id).val(rt_val.toFixed(2));
         $("#ws_val_"+id).val(ws_val.toFixed(2));
         $("#slb_val_"+id).val(slb_val.toFixed(2));
@@ -318,11 +345,11 @@
         $("#fst_val_"+id).val(fst_val.toFixed(2));
         $("#mrp_val_"+id).val(t_mrp.toFixed(2));
         $("#amount_"+id).val(amount.toFixed(2));
-        updateAmounts(); 
+        updateAmounts();
         }
 
         function updateAmounts(){
-        
+
         var totalRt = 0;
         var totalWs = 0;
         var totalSlb = 0;
@@ -399,5 +426,7 @@
             });
             updateAmounts();
         }
+
+
     </script>
 @endsection

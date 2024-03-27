@@ -10,6 +10,7 @@ use App\Models\sale_payment;
 use App\Models\sales;
 use App\Models\salesman;
 use App\Models\stocks;
+use App\Models\todo;
 use App\Models\transactions;
 use Illuminate\Http\Request;
 
@@ -154,7 +155,7 @@ class SalesController extends Controller
             $deal += $deal_val;
             createStock($productID, $req->date, 0, $qty, "Sold in Bill # $sale->id", $refID);
         }
-        
+
         addTransaction(6, $req->date, $fst, 0, $ref, "FST of Sale # $sale->id");
         addTransaction(7, $req->date, $slb, 0, $ref, "Slab of Sale # $sale->id");
         addTransaction(8, $req->date, $deal, 0, $ref, "Deal of Sale # $sale->id");
@@ -174,6 +175,20 @@ class SalesController extends Controller
             );
             addTransaction($req->customerID, $req->date, 0, $total, $ref, "Payment of Sale # $sale->id");
             addTransaction($req->accountID, $req->date, $total, 0, $ref, "Payment of Sale # $sale->id");
+        }
+
+        if($req->reminder)
+        {
+            todo::create(
+                [
+                    'title'     => "Sale Reminder",
+                    'notes'     => $req->reminder,
+                    'level'     => 'medium',
+                    'status'    => 'normal',
+                    'due'       => $req->dueDate,
+                    'refID'     => $ref,
+                ]
+            );
         }
 
         return redirect()->route('saleHistory')->with('success', 'Sale Created');
@@ -212,7 +227,7 @@ class SalesController extends Controller
         }
         foreach($old_sale->payments as $payment)
         {
-           
+
             transactions::where('refID', $payment->refID)->delete();
             $payment->delete();
         }

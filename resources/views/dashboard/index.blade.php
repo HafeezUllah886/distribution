@@ -17,189 +17,171 @@
 
                 </div>
             </div>
-           {{--  <ul class="navbar-nav flex-row ms-auto breadcrumb-action-dropdown">
-                <li class="nav-item more-dropdown">
-                    <div class="dropdown  custom-dropdown-icon">
-                        <a class="dropdown-toggle btn" href="#" role="button" id="customDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span>Settings</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down custom-dropdown-arrow"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="customDropdown">
-
-                            <a class="dropdown-item" data-value="Settings" data-icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-settings&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;></circle><path d=&quot;M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z&quot;></path></svg>" href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Settings
-                            </a>
-
-                            <a class="dropdown-item" data-value="Mail" data-icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-mail&quot;><path d=&quot;M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z&quot;></path><polyline points=&quot;22,6 12,13 2,6&quot;></polyline></svg>" href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> Mail
-                            </a>
-
-                            <a class="dropdown-item" data-value="Print" data-icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-printer&quot;><polyline points=&quot;6 9 6 2 18 2 18 9&quot;></polyline><path d=&quot;M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2&quot;></path><rect x=&quot;6&quot; y=&quot;14&quot; width=&quot;12&quot; height=&quot;8&quot;></rect></svg>" href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg> Print
-                            </a>
-
-                            <a class="dropdown-item" data-value="Download" data-icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-download&quot;><path d=&quot;M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4&quot;></path><polyline points=&quot;7 10 12 15 17 10&quot;></polyline><line x1=&quot;12&quot; y1=&quot;15&quot; x2=&quot;12&quot; y2=&quot;3&quot;></line></svg>" href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download
-                            </a>
-
-                            <a class="dropdown-item" data-value="Share" data-icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-share-2&quot;><circle cx=&quot;18&quot; cy=&quot;5&quot; r=&quot;3&quot;></circle><circle cx=&quot;6&quot; cy=&quot;12&quot; r=&quot;3&quot;></circle><circle cx=&quot;18&quot; cy=&quot;19&quot; r=&quot;3&quot;></circle><line x1=&quot;8.59&quot; y1=&quot;13.51&quot; x2=&quot;15.42&quot; y2=&quot;17.49&quot;></line><line x1=&quot;15.41&quot; y1=&quot;6.51&quot; x2=&quot;8.59&quot; y2=&quot;10.49&quot;></line></svg>" href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg> Share
-                            </a>
-
-                        </div>
-
-                    </div>
-                </li>
-            </ul> --}}
         </header>
     </div>
 </div>
-<div class="row layout-top-spacing">
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Reminders</h6>
+<div class="row layout-top-spacing g-2">
+        <div class="col-md-6">
+            <div class="widget widget-chart-three">
+                <div class="widget-heading">
+                    <div class="">
+                        <h5 class="">Sales vs Expenses (Last 10 days)</h5>
                     </div>
                 </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Due</span> {{reminder()}}</p>
+                <div class="widget-content">
+                    <div id="uniqueVisits"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row g-2">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Reminders</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Due</span> {{reminder()}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Customer Dues</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Rs.</span> {{customer_dues()}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Total Stock</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Nos.</span>  {{stock('totalStock')}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Stock Value</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Rs.</span> {{stock('totalValue')}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Expense (This Month)</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Rs.</span> {{expenseThisMonth()}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Profit / Loss</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Rs.</span> {{profit()}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Cash Balance</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Rs.</span> {{cash_balance()}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Bank Balance</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Rs.</span> {{bank_balance()}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="widget widget-card-four">
+                        <div class="widget-content">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6 class="value" style="font-size:15px;">Cheque Balance</h6>
+                                </div>
+                            </div>
+                            <div class="w-content mt-2">
+                                <div class="w-info">
+                                    <p class="value" style="font-size:15px;"> <span>Rs.</span> {{cheque_balance()}} </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Customer Dues</h6>
-                    </div>
-                </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Rs.</span> {{customer_dues()}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Total Stock</h6>
-                    </div>
-                </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Nos.</span>  {{stock('totalStock')}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Stock Value</h6>
-                    </div>
-                </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Rs.</span> {{stock('totalValue')}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Expense (This Month)</h6>
-                    </div>
-                </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Rs.</span> {{expenseThisMonth()}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Profit / Loss</h6>
-                    </div>
-                </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Rs.</span> {{profit()}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Cash Balance</h6>
-                    </div>
-                </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Rs.</span> {{cash_balance()}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Bank Balance</h6>
-                    </div>
-                </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Rs.</span> {{bank_balance()}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 layout-spacing">
-        <div class="widget widget-card-four">
-            <div class="widget-content">
-                <div class="w-header">
-                    <div class="w-info">
-                        <h6 class="value">Cheque Balance</h6>
-                    </div>
-                </div>
-                <div class="w-content mt-2">
-                    <div class="w-info">
-                        <p class="value"> <span>Rs.</span> {{cheque_balance()}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 <!--  END BREADCRUMBS  -->
 @endsection
@@ -218,8 +200,114 @@
 
      <link href="{{ asset('src/assets/css/light/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
      <link href="{{ asset('src/assets/css/dark/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
-   
-
 
      <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+@endsection
+@section('more-js')
+<script src="{{ asset('src/assets/js/scrollspyNav.js') }}"></script>
+<script src="{{ asset('src/plugins/src/apex/apexcharts.min.js') }}"></script>
+<script>
+    var Theme = 'dark';
+
+      Apex.tooltip = {
+          theme: Theme
+      }
+        var d_1options1 = {
+      chart: {
+          height: 350,
+          type: 'bar',
+          toolbar: {
+            show: false,
+          }
+      },
+      colors: ['#622bd7', '#ffbb44'],
+      plotOptions: {
+          bar: {
+              horizontal: false,
+              columnWidth: '55%',
+              endingShape: 'rounded',
+              borderRadius: 10,
+
+          },
+      },
+      dataLabels: {
+          enabled: false
+      },
+      legend: {
+          position: 'bottom',
+          horizontalAlign: 'center',
+          fontSize: '14px',
+          markers: {
+              width: 10,
+              height: 10,
+              offsetX: -5,
+              offsetY: 0
+          },
+          itemMargin: {
+              horizontal: 10,
+              vertical: 8
+          }
+      },
+      grid: {
+        /* borderColor: '#AEADAD', */
+      },
+      stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent']
+      },
+      series: [{
+          name: 'Sales',
+          data: {!! json_encode($sales) !!}
+      }, {
+          name: 'Expenses',
+          data: {!! json_encode($expenses) !!}
+      }],
+      xaxis: {
+          categories: {!! json_encode($dates) !!},
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: Theme,
+          type: 'vertical',
+          shadeIntensity: 0.3,
+          inverseColors: false,
+          opacityFrom: 1,
+          opacityTo: 0.8,
+          stops: [0, 100]
+        }
+      },
+      tooltip: {
+          marker : {
+              show: false,
+          },
+          theme: Theme,
+          y: {
+              formatter: function (val) {
+                  return val
+              }
+          }
+      },
+      responsive: [
+          {
+              breakpoint: 767,
+              options: {
+                  plotOptions: {
+                      bar: {
+                          borderRadius: 0,
+                          columnWidth: "50%"
+                      }
+                  }
+              }
+          },
+      ]
+      }
+
+        var d_1C_3 = new ApexCharts(
+          document.querySelector("#uniqueVisits"),
+          d_1options1
+      );
+      d_1C_3.render();
+</script>
 @endsection
