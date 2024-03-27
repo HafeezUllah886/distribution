@@ -18,7 +18,7 @@ class productSummaryController extends Controller
             ->select('products.desc', DB::raw('SUM(sale_details.qty) - SUM(sale_return_details.qty) AS total_sold'))
             ->leftJoin('sale_details', 'sale_details.productID', '=', 'products.id')
             ->leftJoin('sale_return_details', 'sale_return_details.productID', '=', 'products.id')
-            ->groupBy('products.id')
+            ->groupBy('products.id', 'product.desc')
             ->orderBy('total_sold', 'desc')
             ->limit(10)
             ->get();
