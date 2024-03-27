@@ -293,6 +293,12 @@
                             <li class="active">
                                 <a href="{{route('profit')}}"> Profit / Loss</a>
                             </li>
+                            <li class="active">
+                                <a href="{{route('productSummary')}}"> Product Summary</a>
+                            </li>
+                            <li class="active">
+                                <a href="{{route('customerSummary')}}"> Customer Summary</a>
+                            </li>
                         </ul>
 
                     </li>

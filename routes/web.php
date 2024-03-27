@@ -3,12 +3,14 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\confirmPasswordController;
+use App\Http\Controllers\customerSummaryController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\DepositWithdrawController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\loadSheetController;
 use App\Http\Controllers\OrderbookerController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\productSummaryController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\profitController;
 use App\Http\Controllers\PurchaseController;
@@ -105,6 +107,9 @@ Route::middleware('auth')->group(function (){
 
     Route::get('report/profit', [profitController::class, 'index'])->name('profit');
     Route::get('report/profit/view', [profitController::class, 'show'])->name('profitView');
+
+    Route::get('report/productsummary', [productSummaryController::class, 'index'])->name('productSummary');
+    Route::get('report/customersummary', [customerSummaryController::class, 'index'])->name('customerSummary');
 
     Route::get('/todo', [TodoController::class, 'index']);
     Route::get('/todo/store', [TodoController::class, 'store']);
